@@ -9,6 +9,7 @@ public class General {
     
     public static void main (String... ars) throws IOException{
         String file = "XLS.xls";
+        String findWord = "";
         /* System.out.println("Создание (субъект, объект, роль)");
         Scanner scan = new Scanner(System.in);
         
@@ -42,7 +43,7 @@ public class General {
         
         //System.out.println(ReadXLS.parse(file));
         //ReadXLS.changeCell(file, 0,0,0,"nnnn");
-        ReadXLS.find(file,"nnnn");
+        ReadXLS.find(file,findWord);
         
     }
     
