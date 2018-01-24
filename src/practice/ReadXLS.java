@@ -19,18 +19,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class ReadXLS {
     
-    public static void changeCell(String file, int sheet, int row, int cell, String change) throws IOException{
-        
-        
-        InputStream inputStream = null;
-        HSSFWorkbook workbook = null;
-      
-        try {
-            inputStream = new FileInputStream(file);
-            workbook = new HSSFWorkbook(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void changeCell(String file, InputStream inputStream, Workbook workbook, int sheet, int row, int cell, String change) throws IOException{
         
         workbook.getSheetAt(sheet).getRow(row).getCell(cell).setCellValue(change);
         inputStream.close();
@@ -41,19 +30,22 @@ public class ReadXLS {
     }
     
     public static void removeRow(String file, InputStream inputStream, Workbook workbook, Sheet sheet, Row row) throws FileNotFoundException, IOException{
- 
-        sheet.removeRow(row);
-        inputStream.close();
- 
-        FileOutputStream out = new FileOutputStream(file);
-        workbook.write(out);
-        out.close();
-    
+        try {
+            
+            sheet.removeRow(row);
+            inputStream.close();
+
+            FileOutputStream out = new FileOutputStream(file);
+            workbook.write(out);
+            out.close();
+        }catch (NullPointerException e) {
+            System.out.println("Запись в xls остутствует");
+        }
     }
     
-    public static void find(String file, String findValue) throws IOException{
-        Row result = null;
-
+    public static void find(String file, int sheetNum, String findValue, String changeTXT, int cellNum) throws IOException{
+        Row record = null;
+        Cell block = null;
         //инициализируем потоки
         InputStream inputStream = null;
         HSSFWorkbook workBook = null;
@@ -64,9 +56,11 @@ public class ReadXLS {
             e.printStackTrace();
         }
      //разбираем первый лист входного файла на объектную модель
-        Sheet sheet = workBook.getSheetAt(0);
+        Sheet sheet = workBook.getSheetAt(sheetNum);
         Iterator<Row> it = sheet.iterator();
      //проходим по всему листу
+        
+       
         while (it.hasNext()) {
             Row row = it.next();
             Iterator<Cell> cells = row.iterator();
@@ -75,13 +69,17 @@ public class ReadXLS {
                 if (cell.getCellType() == Cell.CELL_TYPE_STRING){
                     if (cell.getStringCellValue().toString().equals(findValue)){
                        //System.out.println(cell.getRowIndex());     
-                       result = row;
+                       record = row;
+                       
                     }
                 }  
             }
         }
+        
         //return result;
-        removeRow(file, inputStream, workBook, sheet, result);
+        if(!(changeTXT.isEmpty())){
+            changeCell(file, inputStream, workBook, workBook.getSheetIndex(sheet), record.getRowNum(), cellNum, changeTXT);
+        }else removeRow(file, inputStream, workBook, sheet, record);
     }
 
     public static String parse(String fileName) {

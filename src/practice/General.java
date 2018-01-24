@@ -9,7 +9,10 @@ public class General {
     
     public static void main (String... ars) throws IOException{
         String file = "XLS.xls";
-        String findWord = "";
+        
+        String findWord = "weq";
+        int sheetNum = 0;
+        String changeTXT = "";
         /* System.out.println("Создание (субъект, объект, роль)");
         Scanner scan = new Scanner(System.in);
         
@@ -42,8 +45,11 @@ public class General {
         CreateXLS.writeToXLS(file, ls, sheet); */
         
         //System.out.println(ReadXLS.parse(file));
-        //ReadXLS.changeCell(file, 0,0,0,"nnnn");
-        ReadXLS.find(file,findWord);
+        
+        //ReadXLS.changeCell(file, 0, 0, 0, "nnnn");
+        
+        // Поиск в xls, на введеном номере страницы и ячейки, в случае введения замены - проиходит замена, иначе - удаление записи.
+        ReadXLS.find(file, sheetNum, findWord, changeTXT, 2);    
         
     }
     
