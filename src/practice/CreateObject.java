@@ -11,12 +11,13 @@ public class CreateObject {
         ArrayList SetRule = new ArrayList();
         String[] SetRule1 = {};
 
-        System.out.println("Название профиля:");
+        System.out.println("Название объекта:");
         NameProfile = scan.nextLine();
-
+        SetRule.add(NameProfile);
+        
         System.out.println("Выберите роли:");
 
-        SetRule.add(NameProfile);
+        
         
         
 

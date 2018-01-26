@@ -10,7 +10,7 @@ public class General {
     public static void main (String... ars) throws IOException{
         String file = "XLS.xls";
         
-        String findWord = "weq";
+        String findWord = "";
         int sheetNum = 0;
         String changeTXT = "";
         /* System.out.println("Создание (субъект, объект, роль)");

@@ -1,5 +1,6 @@
 package practice;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CreateRole {
@@ -8,7 +9,7 @@ public class CreateRole {
         Scanner scan = new Scanner(System.in);
         String NameRole;
         boolean read = true;
-        String [] access = new String[3];
+        ArrayList<String> access = new ArrayList<String>();
 
         String accessSt = "";
 
@@ -19,12 +20,11 @@ public class CreateRole {
 
         System.out.println("Список доступных объектов:");
 
-        for (int j = 0; j < 3; j++) {
-            access[j] = scan.nextLine();
+        
+        access.add(scan.nextLine());
 
-            accessSt += access[j] + " ";
-
-        }
+            
+        
 
 
 
