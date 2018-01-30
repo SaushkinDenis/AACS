@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -43,9 +44,11 @@ public class ReadXLS {
         }
     }
     
-    public static void find(String file, int sheetNum, String findValue, String changeTXT, int cellNum) throws IOException{
+    public static ArrayList find(String file, int sheetNum, String findValue, String changeTXT, int cellNum, boolean bool) throws IOException{
         Row record = null;
         Cell block = null;
+        ArrayList record2 = new ArrayList();
+        String[] chan;
         //инициализируем потоки
         InputStream inputStream = null;
         HSSFWorkbook workBook = null;
@@ -67,19 +70,22 @@ public class ReadXLS {
             while (cells.hasNext()) {
                 Cell cell = cells.next();
                 if (cell.getCellType() == Cell.CELL_TYPE_STRING){
-                    if (cell.getStringCellValue().toString().equals(findValue)){
-                       //System.out.println(cell.getRowIndex());     
-                       record = row;
-                       
+                    
+                    chan = cell.getStringCellValue().toString().split(",");
+                    for (String f:chan){
+                    if (f.equals(findValue)){
+                        record2.add(cell.getRowIndex());     
+                        record = row;
+                    }
                     }
                 }  
             }
         }
-        
-        //return result;
         if(!(changeTXT.isEmpty())){
             changeCell(file, inputStream, workBook, workBook.getSheetIndex(sheet), record.getRowNum(), cellNum, changeTXT);
-        }else removeRow(file, inputStream, workBook, sheet, record);
+        }else if(bool) removeRow(file, inputStream, workBook, sheet, record);
+        
+        return record2; 
     }
 
     public static String parse(String fileName) {

@@ -13,6 +13,7 @@ public class General {
         String findWord = "";
         int sheetNum = 0;
         String changeTXT = "";
+        String[] roleThings = {"qwe","rty","ewq"};
         /* System.out.println("Создание (субъект, объект, роль)");
         Scanner scan = new Scanner(System.in);
         
@@ -49,8 +50,8 @@ public class General {
         //ReadXLS.changeCell(file, 0, 0, 0, "nnnn");
         
         // Поиск в xls, на введеном номере страницы и ячейки, в случае введения замены - проиходит замена, иначе - удаление записи.
-        ReadXLS.find(file, sheetNum, findWord, changeTXT, 2);    
-        
+        //ReadXLS.find(file, sheetNum, findWord, changeTXT, 2, true);    
+        System.out.println(LogisticsRole.setRole(file, roleThings)); //Поиск роли по должности, отделу и деятельности String post, String activity, String department
     }
     
 }
