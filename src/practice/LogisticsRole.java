@@ -17,8 +17,8 @@ public class LogisticsRole {
         int maxcount = 0;
         int posit = 0;
         for (String roleThing:roleThings){
-            
-            stems.add(ReadXLS.find(file, 0, roleThing, "", 0, false));
+            ReadXLS RXLS = new ReadXLS(0, roleThing);
+            stems.add(RXLS.arrayNum);
         }
         ArrayList<Integer> resultMerge = getMergedList(stems.get(0),stems.get(1), stems.get(2));
         

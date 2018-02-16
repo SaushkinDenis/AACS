@@ -10,7 +10,7 @@ public class General {
     public static void main (String... ars) throws IOException{
         String file = "XLS.xls";
         
-        String findWord = "";
+        String findWord = "qwerty";
         int sheetNum = 0;
         String changeTXT = "";
         String[] roleThings = {"qwe","rty","ewq"};
@@ -50,8 +50,8 @@ public class General {
         //ReadXLS.changeCell(file, 0, 0, 0, "nnnn");
         
         // Поиск в xls, на введеном номере страницы и ячейки, в случае введения замены - проиходит замена, иначе - удаление записи.
-        //ReadXLS.find(file, sheetNum, findWord, changeTXT, 2, true);    
-        System.out.println(LogisticsRole.setRole(file, roleThings)); //Поиск роли по должности, отделу и деятельности String post, String activity, String department
+        
+        //System.out.println(LogisticsRole.setRole(file, roleThings)); //Поиск роли по должности, отделу и деятельности String post, String activity, String department
     }
     
 }

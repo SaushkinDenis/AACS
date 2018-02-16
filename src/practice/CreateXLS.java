@@ -18,6 +18,16 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class CreateXLS {
+    String file = "XLS.xls";;
+    
+    CreateXLS() throws IOException{
+        CreateXLS(file);
+    
+    }
+    CreateXLS(List<String> newRow, String st) throws IOException{
+        writeToXLS(file, newRow, Integer.parseInt(st));
+    
+    }
     
     public static void CreateXLS(String file) throws FileNotFoundException, IOException{
         Workbook wb = new HSSFWorkbook();
@@ -34,13 +44,13 @@ public class CreateXLS {
         fos.close();
     
     }
-    
-    
-    
+  
     public static synchronized void writeToXLS(String file, List<String> newRow, int st) throws IOException {
     Path p = Paths.get(file);
     String fileName = p.toString();
-
+    
+    ReadXLS RXLS = new ReadXLS(st,newRow.get(0),true);
+    
     if (!Files.exists(p)) {
         Files.createFile(p);
         try (BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(new File(fileName)))) {
@@ -54,13 +64,18 @@ public class CreateXLS {
 
         Workbook workbook = new HSSFWorkbook(fis);
         Sheet sheet = workbook.getSheetAt(st);
-        int rowCount = sheet.getPhysicalNumberOfRows();
-        Row row = sheet.createRow(rowCount + 1);
+        int rowCount;
+     // int rowCount2 = sheet.getPhysicalNumberOfRows();
+        if (RXLS.arrayNum.size()==0){
+            rowCount = sheet.getLastRowNum() + 1;
+        }else rowCount = (int) RXLS.arrayNum.get(0);
+        
+        
+        Row row = sheet.createRow(rowCount);
         for (int cellIndex = 0; cellIndex < newRow.size(); cellIndex++) {
             Cell cell = row.createCell(cellIndex);
             cell.setCellValue(newRow.get(cellIndex));
         }
-
 
         try (BufferedOutputStream fio = new BufferedOutputStream(new FileOutputStream(fileName))) {
             workbook.write(fio);

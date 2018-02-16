@@ -1,38 +1,21 @@
 package practice;
 
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class CreateRecord {
 
-    public static String[] createRecord(){
-        String Name, surName, lastName, profession, activity, rule;
-        Scanner scan = new Scanner(System.in, "Cp1251");
+    public static void createRecord(String... args) throws IOException  {
+        ArrayList <String> record = new ArrayList <String>();
+        for (String g:args){
+            record.add(g);
+        }
 
-
-        System.out.println("Создание профиля!");
-
-        System.out.println("Имя:");
-        Name = scan.nextLine();
-
-        System.out.println("Фамилия:");
-        surName = scan.nextLine();
-
-        System.out.println("Отчество:");
-        lastName = scan.nextLine();
-
-        System.out.println("Занимаемая должность:");
-        profession = scan.nextLine();
-
-        System.out.println("Направление деятельности:");
-        activity = scan.nextLine();
-
-        System.out.println("Права доступа:");
-        rule = scan.nextLine();
-
-        String[] record = {Name, surName, lastName, profession, activity, rule};
-
-        return record;
-
+        List<String> record2 = record;
+        record2.remove(0);
+            ReadXLS RXLS = new ReadXLS(Integer.valueOf(args[0]), record2);  
     }
 }
 
