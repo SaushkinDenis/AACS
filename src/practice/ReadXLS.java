@@ -26,7 +26,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class ReadXLS {
     String file = "XLS.xls";;
     public ArrayList<Integer> arrayNum = new ArrayList<Integer>();
-    
+    public String[] srt;
     
     public ReadXLS(int sheetNum, List<String> ls) throws IOException{
         InputStream inputStream = null;
@@ -93,10 +93,11 @@ public class ReadXLS {
        
         Sheet sheet = workBook.getSheetAt(sheetNum);        
         arrayNum = find(sheet, findValue);
+        String text = "Подтвердите удаление записи.";
         if (!(arrayNum.size()==0)){
             for (int i = 0;i<arrayNum.size();i++){
-                System.out.println(i);
-             removeRow(sheet, sheet.getRow((int) arrayNum.get(i)));
+             
+             removeRow(sheet, sheet.getRow((int) arrayNum.get(i)),text);
        
         }
         }
@@ -123,6 +124,29 @@ public class ReadXLS {
 
     }
     
+    public ReadXLS(int sheetNum) throws IOException{
+            //инициализируем потоки
+        InputStream inputStream = null;
+        HSSFWorkbook workBook = null;
+        try {
+            inputStream = new FileInputStream(file);
+            workBook = new HSSFWorkbook(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       
+        Sheet sheet = workBook.getSheetAt(sheetNum);        
+        ArrayList<String> st = parse(sheetNum, sheet);
+        srt = new String[st.size()];
+        for (int i = 0; i < st.size(); i++){
+            srt[i] = st.get(i);
+        }
+
+        FileOutputStream out = new FileOutputStream(file);
+        workBook.write(out);
+        out.close();
+
+    }
     
     
     public static void changeCell(String file, InputStream inputStream, Workbook workbook, int sheet, int row, int cell, String change) throws IOException{
@@ -134,13 +158,13 @@ public class ReadXLS {
         workbook.write(out);
         out.close();
     }
-    public static void removeRow(Sheet sheet, Row row) {
+    public static void removeRow(Sheet sheet, Row row, String text) {
         JOptionPane optionPane = new JOptionPane();
         UIManager.put("OptionPane.yesButtonText", "Да");
         UIManager.put("OptionPane.noButtonText", "Нет");
         optionPane.updateUI();
 
-        int result = optionPane.showConfirmDialog(null, "Используемое название/ФИО уже используется. Перезаписать?", "Подтверждение удаления!", 
+        int result = optionPane.showConfirmDialog(null, text, "Подтверждение удаления!", 
 	optionPane.YES_NO_OPTION, optionPane.QUESTION_MESSAGE);
 
         switch(result){
@@ -159,7 +183,6 @@ public class ReadXLS {
         Cell block = null;
         ArrayList<Integer> arrayNum = new ArrayList<Integer>();
         String[] chan;
-        System.out.println(findValue);
         //инициализируем потоки
         
      //разбираем первый лист входного файла на объектную модель
@@ -189,45 +212,37 @@ public class ReadXLS {
         return arrayNum; 
     }
 
-    public static String parse(String fileName) {
-    //инициализируем потоки
-        String result = "";
-        InputStream inputStream = null;
-        HSSFWorkbook workBook = null;
-        try {
-            inputStream = new FileInputStream(fileName);
-            workBook = new HSSFWorkbook(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static ArrayList parse(int numSheet, Sheet sheet) {
+
+        ArrayList result = new ArrayList();
      //разбираем первый лист входного файла на объектную модель
-        Sheet sheet = workBook.getSheetAt(0);
+       
         Iterator<Row> it = sheet.iterator();
      //проходим по всему листу
         while (it.hasNext()) {
             Row row = it.next();
             Iterator<Cell> cells = row.iterator();
-            while (cells.hasNext()) {
+            //while (cells.hasNext()) {
                 Cell cell = cells.next();
                 int cellType = cell.getCellType();
       //перебираем возможные типы ячеек
                 switch (cellType) {
                     case Cell.CELL_TYPE_STRING:
-                        result += cell.getStringCellValue() + ":";
+                        result.add(cell.getStringCellValue() + "");
                         break;
                     case Cell.CELL_TYPE_NUMERIC:
-                        result += " " + cell.getNumericCellValue() + "";
+                        result.add(cell.getNumericCellValue() + "");
                         break;
  
                     case Cell.CELL_TYPE_FORMULA:
-                        result += " " + cell.getNumericCellValue() + "";
+                        result.add(cell.getNumericCellValue() + "");
                         break;
                     default:
-                        result += "|";
+                        result.add("");
                         break;
-                }
+                //}
             }
-            result += "\n";
+            
         }
  
         return result;
