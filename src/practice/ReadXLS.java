@@ -124,7 +124,7 @@ public class ReadXLS {
 
     }
     
-    public ReadXLS(int sheetNum) throws IOException{
+    public ReadXLS(int sheetNum, int numCell, String sort) throws IOException{
             //инициализируем потоки
         InputStream inputStream = null;
         HSSFWorkbook workBook = null;
@@ -136,7 +136,7 @@ public class ReadXLS {
         }
        
         Sheet sheet = workBook.getSheetAt(sheetNum);        
-        ArrayList<String> st = parse(sheetNum, sheet);
+        ArrayList<String> st = parse(sheetNum, sheet, numCell, sort);
         srt = new String[st.size()];
         for (int i = 0; i < st.size(); i++){
             srt[i] = st.get(i);
@@ -212,7 +212,7 @@ public class ReadXLS {
         return arrayNum; 
     }
 
-    public static ArrayList parse(int numSheet, Sheet sheet) {
+    public static ArrayList parse(int numSheet, Sheet sheet, int numCell, String sort) {
 
         ArrayList result = new ArrayList();
      //разбираем первый лист входного файла на объектную модель
@@ -223,12 +223,17 @@ public class ReadXLS {
             Row row = it.next();
             Iterator<Cell> cells = row.iterator();
             //while (cells.hasNext()) {
-                Cell cell = cells.next();
+                //Cell cell = cells.next();
+                Cell cell = row.getCell(numCell);
                 int cellType = cell.getCellType();
       //перебираем возможные типы ячеек
                 switch (cellType) {
                     case Cell.CELL_TYPE_STRING:
-                        result.add(cell.getStringCellValue() + "");
+                        if (sort == ""){
+                            result.add(cell.getStringCellValue() + "");
+                        }else if (cell.getStringCellValue().equals(sort)) {
+                            result.add(row.getCell(0).getStringCellValue());
+                        }
                         break;
                     case Cell.CELL_TYPE_NUMERIC:
                         result.add(cell.getNumericCellValue() + "");
