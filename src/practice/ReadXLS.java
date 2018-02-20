@@ -164,7 +164,7 @@ public class ReadXLS {
         UIManager.put("OptionPane.noButtonText", "Нет");
         optionPane.updateUI();
 
-        int result = optionPane.showConfirmDialog(null, text, "Подтверждение удаления!", 
+        int result = optionPane.showConfirmDialog(null, text, "Подтверждение редактирования!", 
 	optionPane.YES_NO_OPTION, optionPane.QUESTION_MESSAGE);
 
         switch(result){

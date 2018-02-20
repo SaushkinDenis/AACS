@@ -6,10 +6,12 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import practice.CreateRecord;
+import practice.ReadXLS;
 
 
 
@@ -17,9 +19,16 @@ import practice.CreateRecord;
 public class WindowCreateRecord extends javax.swing.JFrame {
     private JButton jout;
     public String res = "";
-
-
-    public WindowCreateRecord() {
+    ReadXLS RXLS;
+    String[] allPosition, allActivities, allDepartment;
+    public WindowCreateRecord() throws IOException {
+        
+        this.RXLS = new ReadXLS(2,1,"Должность");
+        allPosition = RXLS.srt;
+        this.RXLS = new ReadXLS(2,1,"Отдел");
+        allDepartment = RXLS.srt;
+        this.RXLS = new ReadXLS(2,1,"Направление деятельности");
+        allActivities = RXLS.srt;
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -82,16 +91,19 @@ public class WindowCreateRecord extends javax.swing.JFrame {
 
         jLabel5.setText("Мобильный телефон");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(allPosition));
+        jComboBox1.setEditable(true);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(allDepartment));
+        jComboBox2.setEditable(true);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(allActivities));
+        jComboBox3.setEditable(true);
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +203,7 @@ public class WindowCreateRecord extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
+      
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -226,9 +238,9 @@ public class WindowCreateRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    
     public static void main() {
         
         try {
@@ -250,11 +262,16 @@ public class WindowCreateRecord extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WindowCreateRecord().setVisible(true);
+                try {
+                    new WindowCreateRecord().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
-
+    private DefaultComboBoxModel model = new DefaultComboBoxModel();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

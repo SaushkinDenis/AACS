@@ -4,14 +4,26 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import practice.CreateObject;
 import practice.CreateRecord;
 import practice.CreateRole;
+import practice.ReadXLS;
 
 public class WindowCreateObject extends javax.swing.JFrame {
-
-    public WindowCreateObject() {
+    ReadXLS RXLS;
+    
+    public WindowCreateObject() throws IOException {
+        String[] allObject;
+        this.RXLS = new ReadXLS(2,1,"Объект наблюдения");
+        for (String item:RXLS.srt){
+            listModel.addElement(item);
+        }
+        this.RXLS = new ReadXLS(1,0,"");
+        for (String item:RXLS.srt){
+            listModel2.addElement(item);
+        }
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -118,18 +130,11 @@ public class WindowCreateObject extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jList1.setModel(listModel
+        );
         jScrollPane1.setViewportView(jList1);
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jList2.setModel(listModel2);
         jScrollPane2.setViewportView(jList2);
 
         jLabel5.setText("наблюдения");
@@ -178,7 +183,7 @@ public class WindowCreateObject extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(58, 58, 58)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 232, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1))
@@ -285,11 +290,16 @@ public class WindowCreateObject extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WindowCreateObject().setVisible(true);
+                try {
+                    new WindowCreateObject().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(WindowCreateObject.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
-
+    final DefaultListModel listModel = new DefaultListModel();
+    final DefaultListModel listModel2 = new DefaultListModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

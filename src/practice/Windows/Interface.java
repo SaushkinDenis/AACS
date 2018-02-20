@@ -15,9 +15,22 @@ import javax.swing.tree.TreeModel;
 import practice.ReadXLS;
 
 public class Interface extends javax.swing.JFrame {
-
-    public Interface() {
+    ReadXLS RXLS;
+    
+    public Interface() throws IOException {
+        RXLS = new ReadXLS (0,0,"");
+        for(String i:RXLS.srt) {
+            if (!(listModel.contains(i))){
+                listModel.addElement(i);
+            }
+        }
         
+        RXLS = new ReadXLS(1,0,"");
+        for(String i:RXLS.srt) {
+            if (!(listMode2.contains(i))){
+                listMode2.addElement(i);
+            }
+        }
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
     }
@@ -72,11 +85,7 @@ public class Interface extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu17 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -407,41 +416,13 @@ public class Interface extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem8);
 
-        jMenu2.setText("Объект");
-
-        jMenuItem3.setText("Объект наблюдения");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem3);
-
-        jMenuItem2.setText("Должность");
+        jMenuItem2.setText("Объект");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
-
-        jMenuItem9.setText("Направление деятельости");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem9);
-
-        jMenuItem10.setText("Отдел");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem10);
-
-        jMenu5.add(jMenu2);
+        jMenu5.add(jMenuItem2);
 
         jMenuItem4.setText("Роль");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -550,25 +531,9 @@ public class Interface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        WindowCreateObject.main();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        WindowCreateObject.main();
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         WindowCreateRecord.main();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        WindowCreateObject.main();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        WindowCreateObject.main();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         reference.main();
@@ -579,7 +544,7 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        WindowCreateObject.main();
+       
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -588,7 +553,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
-            ReadXLS RXLS = new ReadXLS (0,0,"");
+             ReadXLS RXLS = new ReadXLS (0,0,"");
             for(String i:RXLS.srt) {
                 if (!(listModel.contains(i))){
                     listModel.addElement(i);
@@ -700,6 +665,10 @@ public class Interface extends javax.swing.JFrame {
         jTree1.setModel(model);
 
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+         WindowCreateObject.main();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
     final DefaultListModel listModel = new DefaultListModel();
     final DefaultListModel listMode2 = new DefaultListModel();
 
@@ -737,7 +706,11 @@ public class Interface extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             
             public void run() {
-                new Interface().setVisible(true);
+                try {
+                    new Interface().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
             }
         });
@@ -766,20 +739,16 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu17;
     private javax.swing.JMenu jMenu18;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
