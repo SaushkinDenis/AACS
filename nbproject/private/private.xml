@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NetBeans/Practice/src/practice/Windows/WindowCreateRole.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/CreateRecord.java</file>
             <file>file:/D:/NetBeans/Practice/src/practice/Windows/Interface.java</file>
+            <file>file:/D:/NetBeans/Practice/src/practice/LogisticsRole.java</file>
             <file>file:/D:/NetBeans/Practice/src/practice/ReadXLS.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/CreateXLS.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/Windows/WindowCreateObject.java</file>
+            <file>file:/D:/NetBeans/Practice/src/practice/General.java</file>
         </group>
     </open-files>
 </project-private>

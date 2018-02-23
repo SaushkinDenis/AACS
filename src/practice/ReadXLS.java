@@ -24,9 +24,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class ReadXLS {
-    String file = "XLS.xls";;
+    String file = "XLS.xls";
     public ArrayList<Integer> arrayNum = new ArrayList<Integer>();
     public String[] srt;
+    public boolean fact;
     
     public ReadXLS(int sheetNum, List<String> ls) throws IOException{
         InputStream inputStream = null;
@@ -81,7 +82,8 @@ public class ReadXLS {
         out.close();
     }
 
-    public ReadXLS(int sheetNum, String findValue, boolean control) throws IOException{
+    public ReadXLS(int sheetNum, String findValue, boolean control) throws IOException{ // Удаление строки по номеру страницы, имени строки и true
+        fact = false;
         InputStream inputStream = null;
         HSSFWorkbook workBook = null;
         try {
@@ -96,15 +98,12 @@ public class ReadXLS {
         String text = "Подтвердите удаление записи.";
         if (!(arrayNum.size()==0)){
             for (int i = 0;i<arrayNum.size();i++){
-             
-             removeRow(sheet, sheet.getRow((int) arrayNum.get(i)),text);
-       
-        }
+                fact = removeRow(sheet, sheet.getRow((int) arrayNum.get(i)),text);
+            }
         }
         FileOutputStream out = new FileOutputStream(file);
         workBook.write(out);
         out.close();
-    
     }
     public ReadXLS(int sheetNum, String findValue) throws IOException{
         InputStream inputStream = null;
@@ -158,24 +157,28 @@ public class ReadXLS {
         workbook.write(out);
         out.close();
     }
-    public static void removeRow(Sheet sheet, Row row, String text) {
+    public static boolean removeRow(Sheet sheet, Row row, String text) {
         JOptionPane optionPane = new JOptionPane();
         UIManager.put("OptionPane.yesButtonText", "Да");
         UIManager.put("OptionPane.noButtonText", "Нет");
         optionPane.updateUI();
-
+        boolean fact = false; 
         int result = optionPane.showConfirmDialog(null, text, "Подтверждение редактирования!", 
 	optionPane.YES_NO_OPTION, optionPane.QUESTION_MESSAGE);
 
         switch(result){
 	    case JOptionPane.YES_OPTION: 
-                    sheet.removeRow(row);
-                    break;
-	    case JOptionPane.NO_OPTION:  break;
+                sheet.removeRow(row);
+                fact = true;
+                break;
+	    case JOptionPane.NO_OPTION: 
+                fact = false; 
+                break;
 	    case JOptionPane.CLOSED_OPTION:  break;
 	    default: break;
 	    }
         
+        return fact;
     }
     
     public static ArrayList find(Sheet sheet, String findValue) throws IOException{

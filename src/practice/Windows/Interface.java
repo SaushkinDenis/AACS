@@ -12,6 +12,8 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
+import practice.LogisticsRole;
 import practice.ReadXLS;
 
 public class Interface extends javax.swing.JFrame {
@@ -233,6 +235,11 @@ public class Interface extends javax.swing.JFrame {
         });
 
         jButton12.setText("Удалить");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -544,7 +551,7 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       
+        WindowCreateObject.main();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -569,8 +576,10 @@ public class Interface extends javax.swing.JFrame {
         String res = jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1);
         try {
             ReadXLS RXLS = new ReadXLS (0,res,true);
-            listModel.removeElement(res);
-
+            if (RXLS.fact){
+                listModel.removeElement(res);
+            }
+            
         } catch (IOException ex) {
             Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -598,8 +607,9 @@ public class Interface extends javax.swing.JFrame {
         String res1 = jList4.getSelectedValuesList().toString().substring(1, jList4.getSelectedValuesList().toString().length()-1);
         try {
             ReadXLS RXLS = new ReadXLS (1,res1,true);
-            listMode2.removeElement(res1);
-
+             if (RXLS.fact){
+                listMode2.removeElement(res1);
+             }
         } catch (IOException ex) {
             Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -669,6 +679,21 @@ public class Interface extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
          WindowCreateObject.main();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        TreePath[] selected = jTree1.getSelectionPaths();
+        int[] rows = jTree1.getSelectionRows();
+        try {
+            ReadXLS RXLS = new ReadXLS(2,selected[0].getLastPathComponent().toString(),true);
+            if (RXLS.fact){
+                jButton10ActionPerformed(null);
+            }
+           
+        } catch (IOException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton12ActionPerformed
     final DefaultListModel listModel = new DefaultListModel();
     final DefaultListModel listMode2 = new DefaultListModel();
 
