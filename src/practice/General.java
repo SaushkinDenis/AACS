@@ -12,7 +12,7 @@ public class General {
         
         String findWord = "qwerty";
         int sheetNum = 0;
-        String changeTXT = "";
+        String changeTXT = "a,b,c";
         String[] roleThings = {"qwe","rty","ewq"};
         /* System.out.println("Создание (субъект, объект, роль)");
         Scanner scan = new Scanner(System.in);
@@ -51,7 +51,12 @@ public class General {
         
         // Поиск в xls, на введеном номере страницы и ячейки, в случае введения замены - проиходит замена, иначе - удаление записи.
         
-        //System.out.println(LogisticsRole.setRole(file, roleThings)); //Поиск роли по должности, отделу и деятельности String post, String activity, String department
+        //System.out.println(LogisticsRole.setRole(roleThings)); //Поиск роли по должности, отделу и деятельности String post, String activity, String department
+    
+        String [] s = changeTXT.split(",");
+        for (String h:s){
+            System.out.println(h);
+        }        
     }
     
 }

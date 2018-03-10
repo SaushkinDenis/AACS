@@ -9,71 +9,12 @@
             <Property name="text" type="java.lang.String" value="&#x41c;&#x435;&#x43d;&#x44e;"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#x421;&#x43e;&#x437;&#x434;&#x430;&#x442;&#x44c;"/>
-              </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x43b;&#x44c;&#x437;&#x43e;&#x432;&#x430;&#x442;&#x435;&#x43b;&#x44c;"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x41e;&#x431;&#x44a;&#x435;&#x43a;&#x442;"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x43b;&#x44c;"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu17">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#x420;&#x435;&#x434;&#x430;&#x43a;&#x442;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x442;&#x44c;"/>
-              </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x43b;&#x44c;&#x437;&#x43e;&#x432;&#x430;&#x442;&#x435;&#x43b;&#x44c;"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x41e;&#x431;&#x44a;&#x435;&#x43a;&#x442;"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x43b;&#x44c;"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="Statistics">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x421;&#x442;&#x430;&#x442;&#x438;&#x441;&#x442;&#x438;&#x43a;&#x430;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StatisticsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -83,12 +24,12 @@
             <Property name="text" type="java.lang.String" value="&#x421;&#x43f;&#x440;&#x430;&#x432;&#x43a;&#x430;"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
+            <MenuItem class="javax.swing.JMenuItem" name="Reference">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x41e; &#x43f;&#x440;&#x43e;&#x433;&#x440;&#x430;&#x43c;&#x43c;&#x435;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem13ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReferenceActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -123,14 +64,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jButton3" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="CreateAccount" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                      <Component id="CreateObject" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                      <Component id="CreateRole" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="TabbedPane" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -142,21 +83,21 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CreateObject" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CreateRole" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jButton3" max="32767" attributes="0"/>
+                  <Component id="CreateAccount" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="TabbedPane" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+    <Container class="javax.swing.JTabbedPane" name="TabbedPane">
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTabbedPane1MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TabbedPaneMouseClicked"/>
       </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -181,31 +122,79 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <Component id="UpdateListAccounts" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="ChangeAccount" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="RemoveAccount" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="225" max="32767" attributes="0"/>
+                          <Component id="SaveChangesAccount" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jScrollPane2" min="-2" pref="283" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" min="-2" pref="283" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="jButton4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="430" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextPhoneNumber" max="32767" attributes="0"/>
+                              <Component id="jComboBoxActivities" pref="170" max="32767" attributes="0"/>
+                              <Component id="jComboBoxDepartment" max="32767" attributes="0"/>
+                              <Component id="jComboBoxPost" max="32767" attributes="0"/>
+                              <Component id="jTextFirstLastName" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane2" min="-2" pref="212" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jScrollPane2" min="-2" pref="212" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="UpdateListAccounts" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ChangeAccount" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="RemoveAccount" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="SaveChangesAccount" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextFirstLastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxPost" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxActivities" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
-                          <EmptySpace pref="27" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -218,37 +207,98 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JList" name="jList1">
+                    <Component class="javax.swing.JList" name="jListAccounts">
                       <Properties>
                         <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="listModel&#xa;" type="code"/>
+                          <Connection code="ListAccounts" type="code"/>
                         </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="ChangeAccount">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x420;&#x435;&#x434;&#x430;&#x43a;&#x442;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x442;&#x44c;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeAccountActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="RemoveAccount">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x423;&#x434;&#x430;&#x43b;&#x438;&#x442;&#x44c;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoveAccountActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton4">
+                <Component class="javax.swing.JButton" name="UpdateListAccounts">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x41e;&#x431;&#x43d;&#x43e;&#x432;&#x438;&#x442;&#x44c;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateListAccountsActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x424;&#x418;&#x41e;"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x414;&#x43e;&#x43b;&#x436;&#x43d;&#x43e;&#x441;&#x442;&#x44c;"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x434;&#x435;&#x43b;"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x41d;&#x430;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x435; &#x434;&#x435;&#x44f;&#x442;&#x435;&#x43b;&#x44c;&#x43d;&#x43e;&#x441;&#x442;&#x438;"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x41c;&#x43e;&#x431;&#x438;&#x43b;&#x44c;&#x43d;&#x44b;&#x439; &#x442;&#x435;&#x43b;&#x435;&#x444;&#x43e;&#x43d;"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFirstLastName">
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextPhoneNumber">
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBoxPost">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.DefaultComboBoxModel(allPosition));&#xa;jComboBoxPost.setEditable(true" type="code"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBoxDepartment">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.DefaultComboBoxModel(allDepartment));&#xa;jComboBoxDepartment.setEditable(true" type="code"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBoxActivities">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.DefaultComboBoxModel(allActivities));&#xa;jComboBoxActivities.setEditable(true" type="code"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="SaveChangesAccount">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x421;&#x43e;&#x445;&#x440;&#x430;&#x43d;&#x438;&#x442;&#x44c;"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveChangesAccountActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -277,15 +327,15 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="UpdateListRole" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ChangeRole" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                                  <Component id="RemoveRole" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane9" min="-2" pref="283" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="430" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="457" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -295,11 +345,11 @@
                           <Component id="jScrollPane9" min="-2" pref="212" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="UpdateListRole" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ChangeRole" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="RemoveRole" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="27" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -312,34 +362,37 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JList" name="jList4">
+                    <Component class="javax.swing.JList" name="jListRole">
                       <Properties>
                         <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="listMode2" type="code"/>
+                          <Connection code="ListRoles" type="code"/>
                         </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButton5">
+                <Component class="javax.swing.JButton" name="UpdateListRole">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x41e;&#x431;&#x43d;&#x43e;&#x432;&#x438;&#x442;&#x44c;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateListRoleActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton6">
+                <Component class="javax.swing.JButton" name="ChangeRole">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x420;&#x435;&#x434;&#x430;&#x43a;&#x442;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x442;&#x44c;"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeRoleActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton9">
+                <Component class="javax.swing.JButton" name="RemoveRole">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x423;&#x434;&#x430;&#x43b;&#x438;&#x442;&#x44c;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoveRoleActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -368,15 +421,15 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jButton10" min="-2" max="-2" attributes="0"/>
+                                  <Component id="UpdateTreeObject" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton11" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ChangeObject" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton12" min="-2" max="-2" attributes="0"/>
+                                  <Component id="RemoveObject" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane4" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="430" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="457" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -386,11 +439,11 @@
                           <Component id="jScrollPane4" min="-2" pref="212" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton11" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton12" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="UpdateTreeObject" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ChangeObject" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="RemoveObject" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="27" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -403,37 +456,37 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTree" name="jTree1">
+                    <Component class="javax.swing.JTree" name="jTreeObjects">
                       <Properties>
                         <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="model" type="code"/>
+                          <Connection code="TreeObjects" type="code"/>
                         </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButton10">
+                <Component class="javax.swing.JButton" name="UpdateTreeObject">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x41e;&#x431;&#x43d;&#x43e;&#x432;&#x438;&#x442;&#x44c;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateTreeObjectActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton11">
+                <Component class="javax.swing.JButton" name="ChangeObject">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x420;&#x435;&#x434;&#x430;&#x43a;&#x442;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x442;&#x44c;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeObjectActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton12">
+                <Component class="javax.swing.JButton" name="RemoveObject">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x423;&#x434;&#x430;&#x43b;&#x438;&#x442;&#x44c;"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoveObjectActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -452,27 +505,27 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane3" alignment="0" pref="726" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="753" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane3" pref="270" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="123" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="142" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable2">
+                <Component class="javax.swing.JTable" name="jTable1">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">
@@ -488,239 +541,30 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JTabbedPane" name="jTabbedPane3">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="&#x41e;&#x431;&#x44a;&#x435;&#x43a;&#x442;&#x44b;">
-                <Property name="tabTitle" type="java.lang.String" value="&#x41e;&#x431;&#x44a;&#x435;&#x43a;&#x442;&#x44b;"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
-          <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel6">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&#x41e;&#x431;&#x44a;&#x435;&#x43a;&#x442;&#x44b; &#x43d;&#x430;&#x431;&#x43b;&#x44e;&#x434;&#x435;&#x43d;&#x438;&#x44f;">
-                    <Property name="tabTitle" type="java.lang.String" value="&#x41e;&#x431;&#x44a;&#x435;&#x43a;&#x442;&#x44b; &#x43d;&#x430;&#x431;&#x43b;&#x44e;&#x434;&#x435;&#x43d;&#x438;&#x44f;"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane7" min="-2" pref="129" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="592" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane7" alignment="0" pref="253" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane7">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JList" name="jList2">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                            <StringItem index="4" value="Item 5"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="jPanel7">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&#x414;&#x43e;&#x43b;&#x436;&#x43d;&#x43e;&#x441;&#x442;&#x438;">
-                    <Property name="tabTitle" type="java.lang.String" value="&#x414;&#x43e;&#x43b;&#x436;&#x43d;&#x43e;&#x441;&#x442;&#x438;"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane8" min="-2" pref="129" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="592" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane8" alignment="0" pref="253" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane8">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JList" name="jList3">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                            <StringItem index="4" value="Item 5"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="jPanel9">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&#x41d;&#x430;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x44f; &#x434;&#x435;&#x44f;&#x442;&#x435;&#x43b;&#x44c;&#x43d;&#x43e;&#x441;&#x442;&#x438;">
-                    <Property name="tabTitle" type="java.lang.String" value="&#x41d;&#x430;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x44f; &#x434;&#x435;&#x44f;&#x442;&#x435;&#x43b;&#x44c;&#x43d;&#x43e;&#x441;&#x442;&#x438;"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane10" min="-2" pref="129" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="592" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane10" alignment="0" pref="253" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane10">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JList" name="jList5">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                            <StringItem index="4" value="Item 5"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="jPanel10">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&#x41e;&#x442;&#x434;&#x435;&#x43b;&#x44b;">
-                    <Property name="tabTitle" type="java.lang.String" value="&#x41e;&#x442;&#x434;&#x435;&#x43b;&#x44b;"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane11" min="-2" pref="129" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="592" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane11" alignment="0" pref="253" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane11">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JList" name="jList6">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                            <StringItem index="4" value="Item 5"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
-              </SubComponents>
-            </Container>
-          </SubComponents>
-        </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="CreateAccount">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x41d;&#x43e;&#x432;&#x44b;&#x439; &#x43f;&#x43e;&#x43b;&#x44c;&#x437;&#x43e;&#x432;&#x430;&#x442;&#x435;&#x43b;&#x44c;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateAccountActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton7">
+    <Component class="javax.swing.JButton" name="CreateObject">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x41d;&#x43e;&#x432;&#x44b;&#x439; &#x43e;&#x431;&#x44a;&#x435;&#x43a;&#x442;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateObjectActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton8">
+    <Component class="javax.swing.JButton" name="CreateRole">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x41d;&#x43e;&#x432;&#x430;&#x44f; &#x440;&#x43e;&#x43b;&#x44c;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateRoleActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

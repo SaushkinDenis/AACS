@@ -14,20 +14,20 @@ public class WindowCreateRole extends javax.swing.JFrame {
     ReadXLS RXLS;
     
     public WindowCreateRole() throws IOException  {
-        this.RXLS = new ReadXLS(2,1,"Объект наблюдения");
+        this.RXLS = new ReadXLS(2,1,"Объект наблюдения",0);
         for (String item:RXLS.srt){
             listModel1.addElement(item);    
         }
-        this.RXLS = new ReadXLS(2,1,"Должность");
+        this.RXLS = new ReadXLS(2,1,"Должность",0);
         for (String item:RXLS.srt){
             listModel2.addElement(item);    
         }
         
-        this.RXLS = new ReadXLS(2,1,"Отдел");
+        this.RXLS = new ReadXLS(2,1,"Отдел",0);
         for (String item:RXLS.srt){
             listModel3.addElement(item);    
         }
-        this.RXLS = new ReadXLS(2,1,"Направление деятельности");
+        this.RXLS = new ReadXLS(2,1,"Направление деятельности",0);
         for (String item:RXLS.srt){
             listModel4.addElement(item);    
         }

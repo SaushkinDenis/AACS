@@ -10,15 +10,16 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 
 public class LogisticsRole {
-    
-    public static String setRole(String file, String[] roleThings) throws IOException{
+    //public String file = "XLS.xls";
+    public static String setRole(String... roleThings) throws IOException{
         ArrayList<ArrayList> stems = new ArrayList<ArrayList>();
         int count;
         int maxcount = 0;
         int posit = 0;
         for (String roleThing:roleThings){
-            ReadXLS RXLS = new ReadXLS(0, roleThing);
+            ReadXLS RXLS = new ReadXLS(1, roleThing);
             stems.add(RXLS.arrayNum);
+
         }
         ArrayList<Integer> resultMerge = getMergedList(stems.get(0),stems.get(1), stems.get(2));
         
@@ -30,7 +31,7 @@ public class LogisticsRole {
                 
             }
         }
-        return parseRole(file,posit);
+        return parseRole(posit);
         
     }
     
@@ -59,17 +60,17 @@ public class LogisticsRole {
         }
         return d;
     }
-    public static String parseRole(String fileName, int posit){  
+    public static String parseRole(int posit){  
     String result = "";
         InputStream inputStream = null;
         HSSFWorkbook workBook = null;
         try {
-            inputStream = new FileInputStream(fileName);
+            inputStream = new FileInputStream("XLS.xls");
             workBook = new HSSFWorkbook(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    result = workBook.getSheetAt(0).getRow(posit).getCell(0).toString();
+    result = workBook.getSheetAt(1).getRow(posit).getCell(0).toString();
     return result;
     }
 

@@ -1,16 +1,17 @@
 package practice.Windows;
 
 import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import practice.CreateRecord;
+import practice.LogisticsRole;
 import practice.ReadXLS;
 
 
@@ -21,13 +22,14 @@ public class WindowCreateRecord extends javax.swing.JFrame {
     public String res = "";
     ReadXLS RXLS;
     String[] allPosition, allActivities, allDepartment;
+
     public WindowCreateRecord() throws IOException {
         
-        this.RXLS = new ReadXLS(2,1,"Должность");
+        this.RXLS = new ReadXLS(2,1,"Должность",0);
         allPosition = RXLS.srt;
-        this.RXLS = new ReadXLS(2,1,"Отдел");
+        this.RXLS = new ReadXLS(2,1,"Отдел",0);
         allDepartment = RXLS.srt;
-        this.RXLS = new ReadXLS(2,1,"Направление деятельности");
+        this.RXLS = new ReadXLS(2,1,"Направление деятельности",0);
         allActivities = RXLS.srt;
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
@@ -207,9 +209,38 @@ public class WindowCreateRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JOptionPane optionPane = new JOptionPane();
+        UIManager.put("OptionPane.yesButtonText", "Да");
+        UIManager.put("OptionPane.noButtonText", "Нет");
+        optionPane.updateUI();
+        ArrayList setrole = new ArrayList();
+        ReadXLS RXLS;
         try {
-            CreateRecord.createRecord("0",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText());
+            RXLS = new ReadXLS(1,0,"",0);
+            for (String item:RXLS.srt){
+            setrole.add(item);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+	
+        try {
+            String role = LogisticsRole.setRole(jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString());
+            int result = optionPane.showConfirmDialog(null, "Новому пользователю будет соответствовать следующая роль: "+role+ ". Выбрать роль вручную?", "Подтверждение роли!", 
+            optionPane.YES_NO_OPTION, optionPane.QUESTION_MESSAGE);
+
+            switch(result){
+                case JOptionPane.YES_OPTION: 
+                   Object changeRole = optionPane.showInputDialog(null,"Выберите роль","Выбор роли",optionPane.QUESTION_MESSAGE, null, setrole.toArray(), setrole.get(0) );
+                   role = (String) changeRole; 
+                    break;
+                case JOptionPane.NO_OPTION:  break;
+                case JOptionPane.CLOSED_OPTION:  break;
+                default: break;
+	    }
+            CreateRecord.createRecord("0",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText(),role);
             res = jTextField1.getText();
+
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
