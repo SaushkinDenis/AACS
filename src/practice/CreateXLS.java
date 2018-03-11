@@ -29,6 +29,10 @@ public class CreateXLS {
     
     }
     
+    public static void optionPane(){
+        
+    }
+    
     public static void CreateXLS(String file) throws FileNotFoundException, IOException{
         Workbook wb = new HSSFWorkbook();
         
@@ -49,7 +53,7 @@ public class CreateXLS {
     Path p = Paths.get(file);
     String fileName = p.toString();
     
-    ReadXLS RXLS = new ReadXLS(st,newRow.get(0),true);
+    ReadXLS RXLS = new ReadXLS(st,newRow.get(0),"Подтвердите удаление записи.");
     
     if (!Files.exists(p)) {
         Files.createFile(p);
@@ -66,7 +70,7 @@ public class CreateXLS {
         Sheet sheet = workbook.getSheetAt(st);
         int rowCount;
      // int rowCount2 = sheet.getPhysicalNumberOfRows();
-        if (RXLS.arrayNum.size()==0){
+        if (RXLS.arrayNum.isEmpty()){
             rowCount = sheet.getLastRowNum() + 1;
         }else rowCount = (int) RXLS.arrayNum.get(0);
         

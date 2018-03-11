@@ -19,38 +19,42 @@ public class ReadXLS {
     protected String file = "XLS.xls";
     public ArrayList<Integer> arrayNum = new ArrayList<>();
     public String[] srt;
-    public boolean fact;
+    public static boolean answerOfRemove = false;
     protected InputStream inputStream;
     protected HSSFWorkbook workBook;
     protected FileOutputStream outputStream;
     
     public void openStream() throws FileNotFoundException, IOException{
-        this.inputStream = new FileInputStream(file);;
+        //Инициализация потока
+        this.inputStream = new FileInputStream(file);
         this.workBook = new HSSFWorkbook(inputStream);
     }
     
     public void closeStream() throws FileNotFoundException, IOException{
+        //Закрытие потока
         this.outputStream = new FileOutputStream(file);
         this.workBook.write(outputStream);
         this.inputStream.close();
         this.outputStream.close();
     }
     
-    public ReadXLS(int sheetNum, List<String> ls) throws IOException{
-        
-        int rowCount;
-        JOptionPane optionPane = new JOptionPane();
+    public ReadXLS(int sheetNum, List<String> ls) throws IOException{  //Создание записи на указанном листе, если запись отсутствует. 
+        //Создание окна оповещения
+        JOptionPane optionPaneRewrite = new JOptionPane();
         UIManager.put("OptionPane.yesButtonText", "Да");
         UIManager.put("OptionPane.noButtonText", "Нет");
-        optionPane.updateUI();
+        optionPaneRewrite.updateUI();
+        
         openStream();
-       
+        int rowCount;
+        
+        // Поиск совпадения 
         Sheet sheet = workBook.getSheetAt(sheetNum);        
         arrayNum = find(sheet, ls.get(0));
-        
+        // Предоставление выбора по замене существующей записи
         if (!arrayNum.isEmpty()){
-            int result = JOptionPane.showConfirmDialog(null, "Используемое название/ФИО уже используется. Перезаписать?", "Подтверждение удаления!", 
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int result = optionPaneRewrite.showConfirmDialog(null, "Используемое название/ФИО уже используется. Перезаписать?", "Подтверждение удаления!", 
+            optionPaneRewrite.YES_NO_OPTION, optionPaneRewrite.QUESTION_MESSAGE);
 
             switch(result){
                 case JOptionPane.YES_OPTION: 
@@ -68,7 +72,7 @@ public class ReadXLS {
                 default: 
                     break;
 	    }
- 
+        // Создание записи, в случае если запись уникальна      
         } else  {
             rowCount = sheet.getLastRowNum() + 1;
             Row row = sheet.createRow(rowCount);
@@ -81,19 +85,16 @@ public class ReadXLS {
         closeStream();
     }
 
-    public ReadXLS(int sheetNum, String findValue, boolean control) throws IOException{ // Удаление строки по номеру страницы, имени строки и true
-       
-        fact = false;
+    public ReadXLS(int sheetNum, String findValue, String act) throws IOException{ // Удаление строки по номеру страницы, имени строки и true
         openStream();
        
         Sheet sheet = workBook.getSheetAt(sheetNum);        
         arrayNum = find(sheet, findValue);
-        String text = "Подтвердите удаление записи.";
-        
+
         if (!(arrayNum.isEmpty())){
-            for (Integer arrayNum1 : arrayNum) {
-                fact = removeRow(sheet, sheet.getRow((int) arrayNum1), text);
-            }
+            //for (Integer arrayNum1 : arrayNum) {
+                answerOfRemove = removeRow(sheet, sheet.getRow((int) arrayNum.get(0)), act);
+            //}
         }
         
         closeStream();
@@ -114,11 +115,12 @@ public class ReadXLS {
         openStream();
        
         Sheet sheet = workBook.getSheetAt(sheetNum);
-        ArrayList<String> st = parse(sheet, numCell, sort, numCellPin);
-        srt = new String[st.size()];
-        for (int i = 0; i < st.size(); i++){
-            srt[i] = st.get(i);
-        }
+        srt = parse(sheet, numCell, sort, numCellPin);
+        //ArrayList<String> st = parse(sheet, numCell, sort, numCellPin);
+        //srt = new String[st.size()];
+        //for (int i = 0; i < st.size(); i++){
+        //    srt[i] = st.get(i);
+        //}
         
         closeStream();
 
@@ -133,27 +135,26 @@ public class ReadXLS {
 
     public static boolean removeRow(Sheet sheet, Row row, String text) {
         
-        JOptionPane optionPane = new JOptionPane();
-        UIManager.put("OptionPane.yesButtonText", "Да");
-        UIManager.put("OptionPane.noButtonText", "Нет");
-        optionPane.updateUI();
-        boolean fact = false; 
-        int result = JOptionPane.showConfirmDialog(null, text, "Подтверждение редактирования!", 
-	JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        JOptionPane optionPaneRechange = new JOptionPane();
+        UIManager.put("OptionPane.yesButtonText", "Ок");
+        UIManager.put("OptionPane.noButtonText", "Отмена");
+        optionPaneRechange.updateUI();
+        int result = optionPaneRechange.showConfirmDialog(null, text, "Подтверждение редактирования!", 
+	optionPaneRechange.YES_NO_OPTION, optionPaneRechange.QUESTION_MESSAGE);
 
         switch(result){
 	    case JOptionPane.YES_OPTION: 
                 sheet.removeRow(row);
-                fact = true;
+                answerOfRemove = true;
                 break;
 	    case JOptionPane.NO_OPTION: 
-                fact = false; 
+                answerOfRemove = false; 
                 break;
 	    case JOptionPane.CLOSED_OPTION:  break;
 	    default: break;
 	    }
         
-        return fact;
+        return answerOfRemove;
     }
     
     public static ArrayList find(Sheet sheet, String findValue) throws IOException{
@@ -161,41 +162,39 @@ public class ReadXLS {
         ArrayList<Integer> arrayNum = new ArrayList<Integer>();
         String[] chan;
    
-     //разбираем первый лист входного файла на объектную модель
+        //разбираем первый лист входного файла на объектную модель
         Iterator<Row> it = sheet.iterator();
-     //проходим по всему листу
-        
-       
+        //проходим по всему листу
+
         while (it.hasNext()) {
             Row row = it.next();
             Iterator<Cell> cells = row.iterator();
             while (cells.hasNext()) {
                 Cell cell = cells.next();
                 if (cell.getCellType() == Cell.CELL_TYPE_STRING){
-                    
                     chan = cell.getStringCellValue().toString().split(",");
                     for (String f:chan){
-                    if (f.equals(findValue)){
-                        arrayNum.add(cell.getRowIndex());     
-                    }
+                        if (f.equals(findValue)){
+                            arrayNum.add(cell.getRowIndex());     
+                        }
                     }
                 }  
-            }
-            
+            }   
         }  
         return arrayNum; 
     }
 
-    public static ArrayList parse(Sheet sheet, int numCell, String sort, int numCellPin) {
+    public static String[] parse(Sheet sheet, int numCell, String sort, int numCellPin) {
 
-        ArrayList result = new ArrayList();
-     //разбираем первый лист входного файла на объектную модель
+        ArrayList findDate = new ArrayList();
+        String[] result;
+        //разбираем первый лист входного файла на объектную модель
        
         Iterator<Row> it = sheet.iterator();
-     //проходим по всему листу
+        //проходим по всему листу
         while (it.hasNext()) {
             Row row = it.next();
-            Iterator<Cell> cells = row.iterator();
+            //Iterator<Cell> cells = row.iterator();    // Выборка по всем ячейкам
             //while (cells.hasNext()) {
                 //Cell cell = cells.next();
                 Cell cell = row.getCell(numCell);
@@ -203,27 +202,32 @@ public class ReadXLS {
                         //перебираем возможные типы ячеек
                     switch (cellType) {
                         case Cell.CELL_TYPE_STRING:
-                            if (sort == ""){
-                                result.add(cell.getStringCellValue() + "");
+                            if (sort.equals("")){
+                                findDate.add(cell.getStringCellValue() + "");
                             }else if (cell.getStringCellValue().equals(sort)) {
-                                result.add(row.getCell(numCellPin).getStringCellValue());
+                                findDate.add(row.getCell(numCellPin).getStringCellValue());
                             }
                             break;
+                            
                         case Cell.CELL_TYPE_NUMERIC:
-                            result.add(cell.getNumericCellValue() + "");
+                            findDate.add(cell.getNumericCellValue() + "");
                             break;
 
                         case Cell.CELL_TYPE_FORMULA:
-                            result.add(cell.getNumericCellValue() + "");
+                            findDate.add(cell.getNumericCellValue() + "");
                             break;
+                            
                         default:
-                            result.add("");
+                            findDate.add("");
                             break;
-                    //}
+                   
                 }
 
             }
-        
+        result = new String[findDate.size()];
+        for (int i = 0; i < findDate.size(); i++){
+            result[i] = (String) findDate.get(i);
+        }    
         return result;
     }
  

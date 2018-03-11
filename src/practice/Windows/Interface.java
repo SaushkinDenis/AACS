@@ -466,15 +466,18 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_ReferenceActionPerformed
 
     private void CreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAccountActionPerformed
-        WindowCreateRecord.main();      
+        WindowCreateRecord.main(); 
+        UpdateListAccountsActionPerformed(null);
     }//GEN-LAST:event_CreateAccountActionPerformed
 
     private void CreateObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateObjectActionPerformed
         WindowCreateObject.main();
+        UpdateTreeObjectActionPerformed(null);
     }//GEN-LAST:event_CreateObjectActionPerformed
 
     private void CreateRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateRoleActionPerformed
-         WindowCreateRole.main();
+        WindowCreateRole.main();
+        UpdateListRoleActionPerformed(null);
     }//GEN-LAST:event_CreateRoleActionPerformed
 
     private void UpdateListAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListAccountsActionPerformed
@@ -495,8 +498,8 @@ public class Interface extends javax.swing.JFrame {
 
         choiceAccount = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
         try {
-            RXLS = new ReadXLS (0,choiceAccount,true);
-            if (RXLS.fact){
+            RXLS = new ReadXLS (0,choiceAccount,"Подтвердите удаление записи.");
+            if (RXLS.answerOfRemove){
                 ListAccounts.removeElement(choiceAccount);
             }
             
@@ -560,8 +563,8 @@ public class Interface extends javax.swing.JFrame {
         
         choiceRole = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
         try {
-            RXLS = new ReadXLS (1,choiceRole,true);
-             if (RXLS.fact){
+            RXLS = new ReadXLS (1,choiceRole,"Подтвердите удаление записи.");
+             if (RXLS.answerOfRemove){
                 ListRoles.removeElement(choiceRole);
              }
         } catch (IOException ex) {
@@ -635,8 +638,8 @@ public class Interface extends javax.swing.JFrame {
         TreePath[] choiseObjects = jTreeObjects.getSelectionPaths();
         
         try {
-            RXLS = new ReadXLS(2,choiseObjects[0].getLastPathComponent().toString(),true);
-            if (RXLS.fact){
+            RXLS = new ReadXLS(2,choiseObjects[0].getLastPathComponent().toString(),"Подтвердите удаление записи.");
+            if (RXLS.answerOfRemove = false){
                 UpdateTreeObjectActionPerformed(null);
             }
            
@@ -648,19 +651,11 @@ public class Interface extends javax.swing.JFrame {
 
     private void SaveChangesAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveChangesAccountActionPerformed
 
-        JOptionPane optionPane = new JOptionPane();
-        UIManager.put("OptionPane.yesButtonText", "Да");
-        UIManager.put("OptionPane.noButtonText", "Нет");
-        optionPane.updateUI();
-        
         ArrayList setrole = new ArrayList();
         String res1 = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
 
         try {
-            RXLS = new ReadXLS (0,res1,true);
-             if (RXLS.fact){
-                ListAccounts.removeElement(res1);
-            }
+
 
             RXLS = new ReadXLS(1,0,"",0);
             for (String item:RXLS.srt){
@@ -672,10 +667,15 @@ public class Interface extends javax.swing.JFrame {
 	
         try {
             String role = LogisticsRole.setRole(jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString());
-            int choice = JOptionPane.showConfirmDialog(null, "Новому пользователю будет соответствовать следующая роль: "+role+ ". Выбрать роль вручную?", "Подтверждение роли!", 
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (!(role == "")){
+                JOptionPane optionPaneFact = new JOptionPane();
+                UIManager.put("OptionPane.yesButtonText", "Да");
+                UIManager.put("OptionPane.noButtonText", "Нет");
+                optionPaneFact.updateUI();
+                int result = optionPaneFact.showConfirmDialog(null, "Новому пользователю будет соответствовать следующая роль: "+role+ ". Выбрать роль вручную?", "Подтверждение роли!", 
+                optionPaneFact.YES_NO_OPTION, optionPaneFact.QUESTION_MESSAGE);
 
-            switch(choice){
+            switch(result){
                 case JOptionPane.YES_OPTION: 
                     Object changeRole = JOptionPane.showInputDialog(null,"Выберите роль","Выбор роли",JOptionPane.QUESTION_MESSAGE, null, setrole.toArray(), setrole.get(0) );
                     role = (String) changeRole; 
@@ -687,9 +687,14 @@ public class Interface extends javax.swing.JFrame {
                 default: 
                     break;
 	    }
+            
+            RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
+            if (RXLS.answerOfRemove){
+                ListAccounts.removeElement(res1);
+            }
             CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
             choiceRole = jTextFirstLastName.getText();
-
+            }
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
