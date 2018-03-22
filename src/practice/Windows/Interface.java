@@ -62,22 +62,26 @@ public class Interface extends javax.swing.JFrame {
         TabbedPane = new javax.swing.JTabbedPane();
         jToolBar5 = new javax.swing.JToolBar();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jListAccounts = new javax.swing.JList();
         ChangeAccount = new javax.swing.JButton();
         RemoveAccount = new javax.swing.JButton();
         UpdateListAccounts = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListAccounts = new javax.swing.JList();
+        jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextFirstLastName = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jTextPhoneNumber = new javax.swing.JTextField();
+        jComboBoxActivities = new javax.swing.JComboBox();
         jComboBoxPost = new javax.swing.JComboBox();
         jComboBoxDepartment = new javax.swing.JComboBox();
-        jComboBoxActivities = new javax.swing.JComboBox();
+        jTextFirstLastName = new javax.swing.JTextField();
         SaveChangesAccount = new javax.swing.JButton();
+        jTextRole = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jToolBar4 = new javax.swing.JToolBar();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -112,10 +116,10 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jToolBar5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Панель управления", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
+        jToolBar5.setFloatable(false);
         jToolBar5.setRollover(true);
-
-        jListAccounts.setModel(ListAccounts);
-        jScrollPane2.setViewportView(jListAccounts);
+        jToolBar5.setAlignmentY(0.5F);
 
         ChangeAccount.setText("Редактировать");
         ChangeAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +142,14 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jListAccounts.setModel(ListAccounts);
+        jListAccounts.setMaximumSize(new java.awt.Dimension(30000, 30000));
+        jListAccounts.setMinimumSize(new java.awt.Dimension(200, 200));
+        jListAccounts.setPreferredSize(new java.awt.Dimension(270, 200));
+        jScrollPane2.setViewportView(jListAccounts);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Панель редактирования", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
+
         jLabel1.setText("ФИО");
 
         jLabel2.setText("Должность");
@@ -148,14 +160,29 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel5.setText("Мобильный телефон");
 
+        jLabel6.setText("Роль");
+
+        jTextPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextPhoneNumberActionPerformed(evt);
+            }
+        });
+
+        jComboBoxActivities.setModel(new javax.swing.DefaultComboBoxModel(allActivities));
+        jComboBoxActivities.setEditable(true);
+
         jComboBoxPost.setModel(new javax.swing.DefaultComboBoxModel(allPosition));
         jComboBoxPost.setEditable(true);
 
         jComboBoxDepartment.setModel(new javax.swing.DefaultComboBoxModel(allDepartment));
         jComboBoxDepartment.setEditable(true);
 
-        jComboBoxActivities.setModel(new javax.swing.DefaultComboBoxModel(allActivities));
-        jComboBoxActivities.setEditable(true);
+        jTextFirstLastName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextFirstLastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFirstLastNameActionPerformed(evt);
+            }
+        });
 
         SaveChangesAccount.setText("Сохранить");
         SaveChangesAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -164,79 +191,123 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jTextRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextRoleActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Отмена");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextPhoneNumber)
+                            .addComponent(jComboBoxActivities, 0, 312, Short.MAX_VALUE)
+                            .addComponent(jComboBoxDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextRole)
+                            .addComponent(jComboBoxPost, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFirstLastName)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(221, 221, 221)
+                        .addComponent(SaveChangesAccount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFirstLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBoxPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBoxActivities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveChangesAccount)
+                    .addComponent(jButton1))
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(UpdateListAccounts)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ChangeAccount)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RemoveAccount)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
-                .addComponent(SaveChangesAccount)
-                .addGap(145, 145, 145))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextPhoneNumber)
-                    .addComponent(jComboBoxActivities, 0, 170, Short.MAX_VALUE)
-                    .addComponent(jComboBoxDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxPost, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFirstLastName)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(UpdateListAccounts)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChangeAccount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RemoveAccount))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(UpdateListAccounts)
-                            .addComponent(ChangeAccount)
-                            .addComponent(RemoveAccount)
-                            .addComponent(SaveChangesAccount)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextFirstLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jComboBoxPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jComboBoxActivities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UpdateListAccounts)
+                    .addComponent(ChangeAccount)
+                    .addComponent(RemoveAccount)))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jToolBar5.add(jPanel1);
 
         TabbedPane.addTab("Пользователи", jToolBar5);
 
+        jToolBar4.setBorder(javax.swing.BorderFactory.createTitledBorder("Панель управления"));
         jToolBar4.setRollover(true);
 
         jListRole.setModel(ListRoles);
+        jListRole.setMaximumSize(new java.awt.Dimension(20000000, 20000000));
+        jListRole.setMinimumSize(new java.awt.Dimension(200, 200));
+        jListRole.setPreferredSize(new java.awt.Dimension(270, 200));
         jScrollPane9.setViewportView(jListRole);
 
         UpdateListRole.setText("Обновить");
@@ -272,19 +343,18 @@ public class Interface extends javax.swing.JFrame {
                         .addComponent(ChangeRole)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RemoveRole))
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 457, Short.MAX_VALUE))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 538, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UpdateListRole)
                     .addComponent(ChangeRole)
-                    .addComponent(RemoveRole))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(RemoveRole)))
         );
 
         jToolBar4.add(jPanel4);
@@ -330,7 +400,7 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RemoveObject))
                     .addComponent(jScrollPane4))
-                .addGap(0, 457, Short.MAX_VALUE))
+                .addGap(0, 561, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,13 +435,13 @@ public class Interface extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 142, Short.MAX_VALUE))
+                .addGap(0, 207, Short.MAX_VALUE))
         );
 
         TabbedPane.addTab("Уведомления", jPanel2);
@@ -437,8 +507,7 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CreateRole)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(TabbedPane))
-                .addContainerGap())
+                    .addComponent(TabbedPane)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,70 +548,6 @@ public class Interface extends javax.swing.JFrame {
         WindowCreateRole.main();
         UpdateListRoleActionPerformed(null);
     }//GEN-LAST:event_CreateRoleActionPerformed
-
-    private void UpdateListAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListAccountsActionPerformed
-        
-        try {
-            RXLS = new ReadXLS (0,0,"",0);
-            for(String i:RXLS.srt) {
-                if (!(ListAccounts.contains(i))){
-                    ListAccounts.addElement(i);
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_UpdateListAccountsActionPerformed
-
-    private void RemoveAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveAccountActionPerformed
-
-        choiceAccount = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
-        try {
-            RXLS = new ReadXLS (0,choiceAccount,"Подтвердите удаление записи.");
-            if (RXLS.answerOfRemove){
-                ListAccounts.removeElement(choiceAccount);
-            }
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_RemoveAccountActionPerformed
-
-    private void ChangeAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeAccountActionPerformed
-        
-        choiceAccount = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
-        jTextFirstLastName.setText(choiceAccount);
-        String newItem = null;
-        
-        try {
-            RXLS = new ReadXLS(0,0,choiceAccount,1);
-            for(String element:RXLS.srt) {
-               newItem = element; 
-            }
-            jComboBoxPost.setSelectedItem(newItem);
-            
-            RXLS = new ReadXLS(0,0,choiceAccount,2);
-            for(String element:RXLS.srt) {
-               newItem = element; 
-            }
-            jComboBoxDepartment.setSelectedItem(newItem);
-            
-            RXLS = new ReadXLS(0,0,choiceAccount,3);
-            for(String element:RXLS.srt) {
-               newItem = element; 
-            }
-            jComboBoxActivities.setSelectedItem(newItem);
-            
-            RXLS = new ReadXLS(0,0,choiceAccount,4);
-            for(String element:RXLS.srt) {
-               newItem = element; 
-            }
-            jTextPhoneNumber.setText(newItem);
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_ChangeAccountActionPerformed
 
     private void UpdateListRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListRoleActionPerformed
         
@@ -649,6 +654,10 @@ public class Interface extends javax.swing.JFrame {
         
     }//GEN-LAST:event_RemoveObjectActionPerformed
 
+    private void ChangeRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeRoleActionPerformed
+        WindowCreateRole.main();
+    }//GEN-LAST:event_ChangeRoleActionPerformed
+
     private void SaveChangesAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveChangesAccountActionPerformed
 
         ArrayList setrole = new ArrayList();
@@ -656,15 +665,14 @@ public class Interface extends javax.swing.JFrame {
 
         try {
 
-
             RXLS = new ReadXLS(1,0,"",0);
             for (String item:RXLS.srt){
-            setrole.add(item);
+                setrole.add(item);
             }
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
-	
+
         try {
             String role = LogisticsRole.setRole(jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString());
             if (!(role == "")){
@@ -672,38 +680,120 @@ public class Interface extends javax.swing.JFrame {
                 UIManager.put("OptionPane.yesButtonText", "Да");
                 UIManager.put("OptionPane.noButtonText", "Нет");
                 optionPaneFact.updateUI();
-                int result = optionPaneFact.showConfirmDialog(null, "Новому пользователю будет соответствовать следующая роль: "+role+ ". Выбрать роль вручную?", "Подтверждение роли!", 
-                optionPaneFact.YES_NO_OPTION, optionPaneFact.QUESTION_MESSAGE);
+                int result = optionPaneFact.showConfirmDialog(null, "Новому пользователю будет соответствовать следующая роль: "+role+ ". Выбрать роль вручную?", "Подтверждение роли!",
+                    optionPaneFact.YES_NO_OPTION, optionPaneFact.QUESTION_MESSAGE);
 
-            switch(result){
-                case JOptionPane.YES_OPTION: 
+                switch(result){
+                    case JOptionPane.YES_OPTION:
                     Object changeRole = JOptionPane.showInputDialog(null,"Выберите роль","Выбор роли",JOptionPane.QUESTION_MESSAGE, null, setrole.toArray(), setrole.get(0) );
-                    role = (String) changeRole; 
+                    role = (String) changeRole;
                     break;
-                case JOptionPane.NO_OPTION:  
+                    case JOptionPane.NO_OPTION:
                     break;
-                case JOptionPane.CLOSED_OPTION:  
+                    case JOptionPane.CLOSED_OPTION:
                     break;
-                default: 
+                    default:
                     break;
-	    }
-            
-            RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
-            if (RXLS.answerOfRemove){
-                ListAccounts.removeElement(res1);
-            }
-            CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
-            choiceRole = jTextFirstLastName.getText();
+                }
+
+                RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
+                if (RXLS.answerOfRemove){
+                    ListAccounts.removeElement(res1);
+                }
+                CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
+                choiceRole = jTextFirstLastName.getText();
             }
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
-        UpdateListAccountsActionPerformed(null);      
+        UpdateListAccountsActionPerformed(null);
     }//GEN-LAST:event_SaveChangesAccountActionPerformed
 
-    private void ChangeRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeRoleActionPerformed
-        WindowCreateRole.main();
-    }//GEN-LAST:event_ChangeRoleActionPerformed
+    private void UpdateListAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListAccountsActionPerformed
+
+        try {
+            RXLS = new ReadXLS (0,0,"",0);
+            for(String i:RXLS.srt) {
+                if (!(ListAccounts.contains(i))){
+                    ListAccounts.addElement(i);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_UpdateListAccountsActionPerformed
+
+    private void RemoveAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveAccountActionPerformed
+
+        choiceAccount = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
+        try {
+            RXLS = new ReadXLS (0,choiceAccount,"Подтвердите удаление записи.");
+            if (RXLS.answerOfRemove){
+                ListAccounts.removeElement(choiceAccount);
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_RemoveAccountActionPerformed
+
+    private void ChangeAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeAccountActionPerformed
+
+        choiceAccount = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
+        jTextFirstLastName.setText(choiceAccount);
+        String newItem = null;
+
+        try {
+            RXLS = new ReadXLS(0,0,choiceAccount,1);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jComboBoxPost.setSelectedItem(newItem);
+
+            RXLS = new ReadXLS(0,0,choiceAccount,2);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jComboBoxDepartment.setSelectedItem(newItem);
+
+            RXLS = new ReadXLS(0,0,choiceAccount,3);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jComboBoxActivities.setSelectedItem(newItem);
+
+            RXLS = new ReadXLS(0,0,choiceAccount,4);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jTextPhoneNumber.setText(newItem);
+           
+            RXLS = new ReadXLS(0,0,choiceAccount,5);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jTextRole.setText(newItem);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ChangeAccountActionPerformed
+
+    private void jTextRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextRoleActionPerformed
+
+    private void jTextPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPhoneNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextPhoneNumberActionPerformed
+
+    private void jTextFirstLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFirstLastNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFirstLastNameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ChangeAccountActionPerformed(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     
     public static void main()  {
@@ -732,6 +822,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton UpdateListAccounts;
     private javax.swing.JButton UpdateListRole;
     private javax.swing.JButton UpdateTreeObject;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBoxActivities;
     private javax.swing.JComboBox jComboBoxDepartment;
     private javax.swing.JComboBox jComboBoxPost;
@@ -740,6 +831,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JList jListAccounts;
     private javax.swing.JList jListRole;
     private javax.swing.JMenu jMenu1;
@@ -749,6 +841,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
@@ -756,6 +849,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFirstLastName;
     private javax.swing.JTextField jTextPhoneNumber;
+    private javax.swing.JTextField jTextRole;
     private javax.swing.JToolBar jToolBar4;
     private javax.swing.JToolBar jToolBar5;
     private javax.swing.JToolBar jToolBar7;

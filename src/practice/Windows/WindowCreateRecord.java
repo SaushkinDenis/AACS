@@ -14,9 +14,6 @@ import practice.CreateRecord;
 import practice.LogisticsRole;
 import practice.ReadXLS;
 
-
-
-
 public class WindowCreateRecord extends javax.swing.JFrame {
     private JButton jout;
     public String res = "";

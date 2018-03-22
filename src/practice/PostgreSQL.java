@@ -11,6 +11,7 @@ public class PostgreSQL {
     public static void main(String[] args) {
         //TestSQL m = new TestSQL();
         //m.TestDatabase();
+        System.out.println(showEvent());
         
     }
     
@@ -55,12 +56,14 @@ public class PostgreSQL {
             c.setAutoCommit(false);
 
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM EVENT;" );
+            ResultSet rs = stmt.executeQuery( "SELECT NAMEEVENT FROM EVENT;" );
             while ( rs.next() ) {
-                int id = rs.getInt("id");
+                //int id = rs.getInt("id");
                 String  nameevent = rs.getString("nameevent");
-                String  object = rs.getString("object");
-                result.add(String.format("ID=%s NAMEEVENT=%s OBJECT=%s",id,nameevent,object));
+                //String  object = rs.getString("object");
+                //result.add(String.format("ID=%s NAMEEVENT=%s OBJECT=%s",id,nameevent,object));
+                result.add(String.format("NAMEEVENT = %s",nameevent));
+                result.add("");
         }
         rs.close();
         stmt.close();
