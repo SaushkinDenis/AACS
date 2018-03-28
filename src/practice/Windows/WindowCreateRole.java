@@ -34,6 +34,7 @@ public class WindowCreateRole extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        this.setTitle("Интеллектуальная Автоматизированная Система Разграничения Доступа");
     }
 
     

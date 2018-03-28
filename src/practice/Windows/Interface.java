@@ -22,37 +22,42 @@ public class Interface extends javax.swing.JFrame {
     protected String choiceRole = "", choiceAccount = "";
     protected DefaultListModel ListAccounts = new DefaultListModel();
     protected DefaultListModel ListRoles = new DefaultListModel();
+    protected DefaultListModel ListObjects = new DefaultListModel();   
+    protected DefaultListModel ListActivities = new DefaultListModel();
+    protected DefaultListModel ListDepartment = new DefaultListModel();
+    protected DefaultListModel ListPosition = new DefaultListModel();
     protected DefaultTreeModel TreeObjects;
     
     public Interface() throws IOException {
         
         this.RXLS = new ReadXLS (0,0,"",0);
         for(String element:RXLS.srt) {
-        if (!(ListAccounts.contains(element))){
-        ListAccounts.addElement(element);
-        }
+            if (!(ListAccounts.contains(element))){
+                ListAccounts.addElement(element);
+            }
         }
         
         
         this.RXLS = new ReadXLS(1,0,"",0);
         for(String element:RXLS.srt) {
-        if (!(ListRoles.contains(element))){
-        ListRoles.addElement(element);
+            if (!(ListRoles.contains(element))){
+                ListRoles.addElement(element);
+            }
         }
-        }
-        
         
         this.RXLS = new ReadXLS(2,1,"Должность",0);
-        allPosition = RXLS.srt;
+        allPosition = RXLS.srt;    
         
         this.RXLS = new ReadXLS(2,1,"Отдел",0);
         allDepartment = RXLS.srt;
         
         this.RXLS = new ReadXLS(2,1,"Направление деятельности",0);
         allActivities = RXLS.srt;
-
+        
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
+        this.setResizable(false);
+        this.setTitle("Интеллектуальная Автоматизированная Система Разграничения Доступа");
     }
 
     @SuppressWarnings("unchecked")
@@ -81,6 +86,8 @@ public class Interface extends javax.swing.JFrame {
         jTextFirstLastName = new javax.swing.JTextField();
         SaveChangesAccount = new javax.swing.JButton();
         jTextRole = new javax.swing.JTextField();
+        jTextRole.setEditable(false);
+        ;
         jButton1 = new javax.swing.JButton();
         jToolBar4 = new javax.swing.JToolBar();
         jPanel4 = new javax.swing.JPanel();
@@ -89,6 +96,26 @@ public class Interface extends javax.swing.JFrame {
         UpdateListRole = new javax.swing.JButton();
         ChangeRole = new javax.swing.JButton();
         RemoveRole = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextNameRole = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jList4 = new javax.swing.JList();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
         jToolBar7 = new javax.swing.JToolBar();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -169,13 +196,18 @@ public class Interface extends javax.swing.JFrame {
         });
 
         jComboBoxActivities.setModel(new javax.swing.DefaultComboBoxModel(allActivities));
-        jComboBoxActivities.setEditable(true);
+        jComboBoxActivities.setEditable(false);
 
         jComboBoxPost.setModel(new javax.swing.DefaultComboBoxModel(allPosition));
-        jComboBoxPost.setEditable(true);
+        jComboBoxPost.setEditable(false);
+        jComboBoxPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPostActionPerformed(evt);
+            }
+        });
 
         jComboBoxDepartment.setModel(new javax.swing.DefaultComboBoxModel(allDepartment));
-        jComboBoxDepartment.setEditable(true);
+        jComboBoxDepartment.setEditable(false);
 
         jTextFirstLastName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextFirstLastName.addActionListener(new java.awt.event.ActionListener() {
@@ -209,30 +241,29 @@ public class Interface extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextPhoneNumber)
-                            .addComponent(jComboBoxActivities, 0, 312, Short.MAX_VALUE)
-                            .addComponent(jComboBoxDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextRole)
-                            .addComponent(jComboBoxPost, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFirstLastName)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(SaveChangesAccount)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                .addGap(221, 221, 221)
+                .addComponent(SaveChangesAccount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTextPhoneNumber, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxActivities, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxDepartment, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxPost, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFirstLastName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextRole, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,11 +291,11 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jTextRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveChangesAccount)
                     .addComponent(jButton1))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -283,25 +314,27 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jScrollPane2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UpdateListAccounts)
                     .addComponent(ChangeAccount)
                     .addComponent(RemoveAccount)))
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jToolBar5.add(jPanel1);
 
         TabbedPane.addTab("Пользователи", jToolBar5);
 
-        jToolBar4.setBorder(javax.swing.BorderFactory.createTitledBorder("Панель управления"));
+        jToolBar4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Панель управления", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
         jToolBar4.setRollover(true);
 
         jListRole.setModel(ListRoles);
@@ -331,26 +364,148 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Название");
+
+        jLabel8.setText("Доступные объекты");
+
+        jTextNameRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNameRoleActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Должности");
+
+        jList1.setModel(ListPosition);
+        jScrollPane5.setViewportView(jList1);
+
+        jLabel10.setText("Направление деятельности ");
+
+        jLabel11.setText("Отдел");
+
+        jList2.setModel(ListDepartment);
+        jScrollPane6.setViewportView(jList2);
+
+        jList3.setModel(ListActivities);
+        jScrollPane7.setViewportView(jList3);
+
+        jButton2.setText("Отмена");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Сохранить");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jList4.setModel(ListObjects);
+        jScrollPane8.setViewportView(jList4);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(UpdateListRole)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ChangeRole)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RemoveRole))
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 538, Short.MAX_VALUE))
+                    .addComponent(jScrollPane9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextNameRole))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(5, 5, 5)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(5, 5, 5))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextNameRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane7)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                        .addGap(8, 8, 8))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UpdateListRole)
                     .addComponent(ChangeRole)
@@ -361,7 +516,10 @@ public class Interface extends javax.swing.JFrame {
 
         TabbedPane.addTab("Роли", jToolBar4);
 
+        jToolBar7.setBorder(null);
         jToolBar7.setRollover(true);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Панель управления ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11))); // NOI18N
 
         jTreeObjects.setModel(TreeObjects);
         jScrollPane4.setViewportView(jTreeObjects);
@@ -400,18 +558,17 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RemoveObject))
                     .addComponent(jScrollPane4))
-                .addGap(0, 561, Short.MAX_VALUE))
+                .addGap(0, 685, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UpdateTreeObject)
                     .addComponent(ChangeObject)
-                    .addComponent(RemoveObject))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(RemoveObject)))
         );
 
         jToolBar7.add(jPanel3);
@@ -435,13 +592,13 @@ public class Interface extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 207, Short.MAX_VALUE))
+                .addGap(0, 219, Short.MAX_VALUE))
         );
 
         TabbedPane.addTab("Уведомления", jPanel2);
@@ -498,16 +655,15 @@ public class Interface extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 985, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(CreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CreateObject)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CreateRole)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(TabbedPane)))
+                        .addComponent(CreateRole))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,34 +704,6 @@ public class Interface extends javax.swing.JFrame {
         WindowCreateRole.main();
         UpdateListRoleActionPerformed(null);
     }//GEN-LAST:event_CreateRoleActionPerformed
-
-    private void UpdateListRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListRoleActionPerformed
-        
-        try {
-            RXLS = new ReadXLS(1,0,"",0);
-            for(String element:RXLS.srt) {
-                if (!(ListRoles.contains(element))){
-                    ListRoles.addElement(element);
-                }
-            }
-
-        } catch (IOException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_UpdateListRoleActionPerformed
-
-    private void RemoveRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveRoleActionPerformed
-        
-        choiceRole = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
-        try {
-            RXLS = new ReadXLS (1,choiceRole,"Подтвердите удаление записи.");
-             if (RXLS.answerOfRemove){
-                ListRoles.removeElement(choiceRole);
-             }
-        } catch (IOException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_RemoveRoleActionPerformed
 
     private void TabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabbedPaneMouseClicked
         UpdateListAccountsActionPerformed(null);
@@ -653,11 +781,7 @@ public class Interface extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_RemoveObjectActionPerformed
-
-    private void ChangeRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeRoleActionPerformed
-        WindowCreateRole.main();
-    }//GEN-LAST:event_ChangeRoleActionPerformed
-
+    
     private void SaveChangesAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveChangesAccountActionPerformed
 
         ArrayList setrole = new ArrayList();
@@ -699,9 +823,9 @@ public class Interface extends javax.swing.JFrame {
                 RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
                 if (RXLS.answerOfRemove){
                     ListAccounts.removeElement(res1);
+                    CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
+                    choiceRole = jTextFirstLastName.getText();
                 }
-                CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
-                choiceRole = jTextFirstLastName.getText();
             }
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
@@ -774,6 +898,7 @@ public class Interface extends javax.swing.JFrame {
             }
             jTextRole.setText(newItem);
 
+            
         } catch (IOException ex) {
             Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -794,6 +919,136 @@ public class Interface extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ChangeAccountActionPerformed(null);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextNameRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNameRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNameRoleActionPerformed
+
+    private void RemoveRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveRoleActionPerformed
+
+        choiceRole = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
+        try {
+            RXLS = new ReadXLS (1,choiceRole,"Подтвердите удаление записи.");
+            if (RXLS.answerOfRemove){
+                ListRoles.removeElement(choiceRole);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_RemoveRoleActionPerformed
+
+    private void ChangeRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeRoleActionPerformed
+        //WindowCreateRole.main();
+
+        choiceRole = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
+        jTextFirstLastName.setText(choiceRole);
+        String newItem = null;
+
+        try {
+            RXLS = new ReadXLS(1,0,choiceRole,0);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jTextNameRole.setText(newItem);
+
+            RXLS = new ReadXLS(1,0,choiceRole,1);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jTextField1.setText(newItem);
+
+            RXLS = new ReadXLS(1,0,choiceRole,2);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jTextField2.setText(newItem);
+            //jComboBoxActivities.setSelectedItem(newItem);
+
+            RXLS = new ReadXLS(1,0,choiceRole,3);
+            for(String element:RXLS.srt) {
+                newItem = element;
+            }
+            jTextField3.setText(newItem);
+            
+            /*            RXLS = new ReadXLS(1,0,choiceRole,4);
+            for(String element:RXLS.srt) {
+            newItem = element;
+            }
+            jTextField4.setText(newItem);*/
+            
+            RXLS = new ReadXLS(2,1,"Должность",0);
+            for(String element:RXLS.srt) {
+                ListPosition.addElement(element);    
+            }
+            
+            RXLS = new ReadXLS(2,1,"Объект наблюдения",0);
+            for (String element:RXLS.srt){
+                ListObjects.addElement(element);    
+            }
+            
+            RXLS = new ReadXLS(2,1,"Отдел",0);
+            for (String element:RXLS.srt){
+                ListDepartment.addElement(element);    
+            }
+            
+            RXLS = new ReadXLS(2,1,"Направление деятельности",0);
+            for (String element:RXLS.srt){
+                ListActivities.addElement(element);    
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ChangeRoleActionPerformed
+
+    private void UpdateListRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListRoleActionPerformed
+
+        try {
+            RXLS = new ReadXLS(1,0,"",0);
+            for(String element:RXLS.srt) {
+                if (!(ListRoles.contains(element))){
+                    ListRoles.addElement(element);
+                }
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_UpdateListRoleActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        String res1 = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
+        System.out.println(res1);
+
+        try {
+                RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
+                if (RXLS.answerOfRemove){
+                    ListRoles.removeElement(res1);
+                    CreateRecord.createRecord("1",jTextNameRole.getText(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(), jList3.getSelectedValuesList().toString());
+                }
+        } catch (IOException ex) {
+            Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        UpdateListRoleActionPerformed(null);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jComboBoxPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPostActionPerformed
     
     
     public static void main()  {
@@ -823,15 +1078,26 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton UpdateListRole;
     private javax.swing.JButton UpdateTreeObject;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBoxActivities;
     private javax.swing.JComboBox jComboBoxDepartment;
     private javax.swing.JComboBox jComboBoxPost;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList jList1;
+    private javax.swing.JList jList2;
+    private javax.swing.JList jList3;
+    private javax.swing.JList jList4;
     private javax.swing.JList jListAccounts;
     private javax.swing.JList jListRole;
     private javax.swing.JMenu jMenu1;
@@ -845,9 +1111,18 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextFirstLastName;
+    private javax.swing.JTextField jTextNameRole;
     private javax.swing.JTextField jTextPhoneNumber;
     private javax.swing.JTextField jTextRole;
     private javax.swing.JToolBar jToolBar4;

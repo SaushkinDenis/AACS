@@ -10,7 +10,8 @@ public class CreateRecord {
     public static void createRecord(String... args) throws IOException  {
         ArrayList <String> record = new ArrayList <String>();
         String[] date = null;
-        for (String data:args){   
+        for (String data:args){  
+            if(!data.isEmpty())
             if (data.contains("[")){
             data = data.substring(1, data.length()-1);
             
