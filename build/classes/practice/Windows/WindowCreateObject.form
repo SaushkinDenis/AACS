@@ -202,7 +202,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x41d;&#x430;&#x437;&#x432;&#x430;&#x43d;&#x438;&#x435; &#x43e;&#x431;&#x44a;&#x435;&#x43a;&#x442;&#x430;"/>
+        <Property name="text" type="java.lang.String" value="&#x41d;&#x430;&#x437;&#x432;&#x430;&#x43d;&#x438;&#x435;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

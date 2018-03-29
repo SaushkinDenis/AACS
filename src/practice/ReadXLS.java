@@ -66,6 +66,7 @@ public class ReadXLS {
                     }
                     break;
                 case JOptionPane.NO_OPTION:  
+                    answerOfRemove = true;
                     break;
                 case JOptionPane.CLOSED_OPTION:  
                     break;

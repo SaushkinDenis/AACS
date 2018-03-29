@@ -10,12 +10,12 @@ import practice.CreateObject;
 import practice.CreateRecord;
 import practice.CreateRole;
 import practice.ReadXLS;
+import static practice.ReadXLS.answerOfRemove;
 
 public class WindowCreateObject extends javax.swing.JFrame {
     ReadXLS RXLS;
     
     public WindowCreateObject() throws IOException {
-        String[] allObject;
         this.RXLS = new ReadXLS(2,1,"Объект наблюдения",0);
         for (String item:RXLS.srt){
             listModel.addElement(item);
@@ -111,7 +111,7 @@ public class WindowCreateObject extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Название объекта");
+        jLabel1.setText("Название");
 
         jLabel2.setText("Тип");
 
@@ -237,70 +237,76 @@ public class WindowCreateObject extends javax.swing.JFrame {
     //String numSheet = "";
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String name = jList2.getSelectedValuesList().toString();
-        
         String changeValue = "";
+        
+        String name = jList2.getSelectedValuesList().toString();
         int num = 0;
         
-        if (!(name.equals("[]"))){
-            name = name.substring(1, name.length()-1);
-            System.out.println(name);
-            
-            String[] splitname = name.split(", ");
-            ReadXLS RXLS;
-            for (String sname:splitname){
-                
-            try {
-                RXLS = new ReadXLS(1,sname);
-                for (int i:RXLS.arrayNum){
-                    num = i;
-                }
-                
-                switch(jComboBox1.getSelectedItem().toString()){
-                    case "Объект наблюдения":
-                        RXLS = new ReadXLS(1,0,sname,1);
-                        for(String i:RXLS.srt){
-                            changeValue = i;
-                        }
-                        changeValue += ", " + jTextField1.getText();
-                        RXLS = new ReadXLS(1,num,1,changeValue);
-                        break;
-                    case "Должность":
-                        RXLS = new ReadXLS(1,0,sname,2);
-                        for(String i:RXLS.srt){
-                            changeValue = i;
-                            System.out.println(changeValue);
-                        }
-                        changeValue += ", " + jTextField1.getText();
-                        RXLS = new ReadXLS(1,num,2,changeValue);
-                        break;
-                    case "Отдел":
-                        RXLS = new ReadXLS(1,0,sname,3);
-                        for(String i:RXLS.srt){
-                            changeValue = i;
-                        }
-                        changeValue += ", " + jTextField1.getText();
-                        RXLS = new ReadXLS(1,num,3,changeValue);
-                        break;
-                    case "Направление деятельности":
-                        RXLS = new ReadXLS(1,0,sname,4);
-                        for(String i:RXLS.srt){
-                            changeValue = i;
-                        }
-                        changeValue += ", " + jTextField1.getText();
-                        RXLS = new ReadXLS(1,num,4,changeValue);
-                        break;
-                        
-                }
-                
-            } catch (IOException ex) {
-                Logger.getLogger(WindowCreateObject.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-        }
+        
         try {
             CreateRecord.createRecord("2",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString());
+            if (answerOfRemove){
+                if (!(name.equals("[]"))){
+                name = name.substring(1, name.length()-1);
+
+                String[] splitname = name.split(", ");
+
+                for (String sname:splitname){
+
+                    try {
+                        RXLS = new ReadXLS(1,sname);
+                        for (int i:RXLS.arrayNum){
+                            num = i;
+                        }
+
+                        switch(jComboBox1.getSelectedItem().toString()){
+
+                            case "Объект наблюдения":
+                                RXLS = new ReadXLS(1,0,sname,1);
+                                for(String i:RXLS.srt){
+                                    changeValue = i;
+                                }
+                                changeValue += ", " + jTextField1.getText();
+                                RXLS = new ReadXLS(1,num,1,changeValue);
+                                break;
+
+                            case "Должность":
+                                RXLS = new ReadXLS(1,0,sname,2);
+                                for(String i:RXLS.srt){
+                                    changeValue = i;
+                                    System.out.println(changeValue);
+                                }
+                                changeValue += ", " + jTextField1.getText();
+                                RXLS = new ReadXLS(1,num,2,changeValue);
+                                break;
+
+                            case "Отдел":
+                                RXLS = new ReadXLS(1,0,sname,3);
+                                for(String i:RXLS.srt){
+                                    changeValue = i;
+                                }
+                                changeValue += ", " + jTextField1.getText();
+                                RXLS = new ReadXLS(1,num,3,changeValue);
+                                break;
+
+                            case "Направление деятельности":
+                                RXLS = new ReadXLS(1,0,sname,4);
+                                for(String i:RXLS.srt){
+                                    changeValue = i;
+                                }
+                                changeValue += ", " + jTextField1.getText();
+                                RXLS = new ReadXLS(1,num,4,changeValue);
+                                break;
+
+                        }
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(WindowCreateObject.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+            }
+                }
+        }
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateObject.class.getName()).log(Level.SEVERE, null, ex);
         }
