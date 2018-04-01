@@ -21,6 +21,7 @@ public class CreateRecord {
 
         List<String> record2 = record;
         record2.remove(0);
+        
         ReadXLS RXLS = new ReadXLS(Integer.valueOf(args[0]), record2); 
         return answerOfRemove;
     }

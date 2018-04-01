@@ -14,6 +14,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import practice.CreateRecord;
 import practice.LogisticsRole;
+import practice.PostgreSQL;
 import practice.ReadXLS;
 
 public class Interface extends javax.swing.JFrame {
@@ -499,11 +500,12 @@ public class Interface extends javax.swing.JFrame {
                             .addComponent(jSaveRole)
                             .addComponent(jCancelSaveRole))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel11)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -759,13 +761,13 @@ public class Interface extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CreateObject)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CreateObject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(CreateRole)
                         .addComponent(jToggleButton1))
                     .addComponent(CreateAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -782,7 +784,7 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_ReferenceActionPerformed
 
     private void CreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAccountActionPerformed
-        WindowCreateRecord.main(); 
+        WindowCreateUser.main(); 
         UpdateListAccountsActionPerformed(null);
     }//GEN-LAST:event_CreateAccountActionPerformed
 
@@ -915,7 +917,7 @@ public class Interface extends javax.swing.JFrame {
                 setrole.add(item);
             }
         } catch (IOException ex) {
-            Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
@@ -948,10 +950,11 @@ public class Interface extends javax.swing.JFrame {
                     listAccounts.removeElement(res1);
                     CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
                     choiceRole = jTextFirstLastName.getText();
+                    PostgreSQL.main("User", jTextFirstLastName.getText());
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         UpdateListAccountsActionPerformed(null);
     }//GEN-LAST:event_SaveChangesAccountActionPerformed
@@ -1156,13 +1159,13 @@ public class Interface extends javax.swing.JFrame {
         String res1 = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
 
         try {
-                RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
+                RXLS = new ReadXLS (1,res1,"Подтвердите редактирование записи");
                 if (RXLS.answerOfRemove){
                     listRoles.removeElement(res1);
-                    CreateRecord.createRecord("1",jTextNameRole.getText(),jList1.getSelectedValuesList().toString(),jList4.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(), jList3.getSelectedValuesList().toString());
+                    CreateRecord.createRecord("1",jTextNameRole.getText(),jList4.getSelectedValuesList().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(), jList3.getSelectedValuesList().toString());
                 }
         } catch (IOException ex) {
-            Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         UpdateListRoleActionPerformed(null);

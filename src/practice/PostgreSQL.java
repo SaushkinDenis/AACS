@@ -8,12 +8,62 @@ import java.util.ArrayList;
  
 public class PostgreSQL {
     
-    public static void main(String[] args) {
+    public static void main(String type, String nameRecord) {
         //TestSQL m = new TestSQL();
         //m.TestDatabase();
+        createRecord(type, nameRecord);
         System.out.println(showEvent());
         
     }
+    
+    public static void createRecord(String type, String nameRecord){
+        Connection c;
+        Statement stmt;
+        ArrayList text = new ArrayList();
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
+            c.setAutoCommit(false);
+            String sql;
+            int id = 0;
+           
+            switch(type){
+                case "User": 
+                    text.add("NAMEUSER");
+                    text.add("LISTUSERS");
+                    break;
+                case"Role": 
+                    text.add("NAMEROLE");
+                    text.add("LISTROLE");
+                    break;
+                case "Object": 
+                    text.add("NAMEOBJECT");
+                    text.add("LISTOBJECTS");
+                    break;
+            }
+            
+            stmt = c.createStatement();
+            System.out.println(nameRecord);
+            ResultSet rs = stmt.executeQuery( "SELECT ID FROM " + text.get(1) + ";");
+            while ( rs.next() ) {
+                id = rs.getInt("id")+1;
+            }
+            
+            stmt = c.createStatement();
+            sql = "INSERT INTO "+text.get(1)+" (ID," + text.get(0) + ") VALUES ("+id+", '"+nameRecord+"');";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            c.commit();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
+    }    
+    
+    }
+    
     
     public static void createEvent(String nameEvent, String object){
         Connection c;
@@ -56,13 +106,13 @@ public class PostgreSQL {
             c.setAutoCommit(false);
 
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT NAMEEVENT FROM EVENT;" );
+            ResultSet rs = stmt.executeQuery( "SELECT NAMEUSER FROM LISTUSERS;" );
             while ( rs.next() ) {
                 //int id = rs.getInt("id");
-                String  nameevent = rs.getString("nameevent");
+                String  nameuser = rs.getString("nameuser");
                 //String  object = rs.getString("object");
                 //result.add(String.format("ID=%s NAMEEVENT=%s OBJECT=%s",id,nameevent,object));
-                result.add(String.format("NAMEEVENT = %s",nameevent));
+                result.add(String.format(nameuser));
                 result.add("");
         }
         rs.close();

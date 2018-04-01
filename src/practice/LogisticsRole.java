@@ -13,7 +13,7 @@ import javax.swing.UIManager;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 import static practice.ReadXLS.answerOfRemove;
-import practice.Windows.WindowCreateRecord;
+import practice.Windows.WindowCreateUser;
 import practice.Windows.WindowCreateRole;
 
 public class LogisticsRole {
@@ -88,7 +88,7 @@ public class LogisticsRole {
                             return parseRole(posit);
                         }
                     } catch (IOException ex) {
-                        Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;   
                 

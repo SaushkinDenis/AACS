@@ -12,15 +12,16 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import practice.CreateRecord;
 import practice.LogisticsRole;
+import practice.PostgreSQL;
 import practice.ReadXLS;
 
-public class WindowCreateRecord extends javax.swing.JFrame {
+public class WindowCreateUser extends javax.swing.JFrame {
     private JButton jout;
     public String res = "";
     ReadXLS RXLS;
     String[] allPosition, allActivities, allDepartment;
 
-    public WindowCreateRecord() throws IOException {
+    public WindowCreateUser() throws IOException {
         
         this.RXLS = new ReadXLS(2,1,"Должность",0);
         allPosition = RXLS.srt;
@@ -216,7 +217,7 @@ public class WindowCreateRecord extends javax.swing.JFrame {
             setrole.add(item);
             }
         } catch (IOException ex) {
-            Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
 	
         try {
@@ -240,10 +241,11 @@ public class WindowCreateRecord extends javax.swing.JFrame {
                 }
                 CreateRecord.createRecord("0",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText(),role);
                 res = jTextField1.getText();
+                PostgreSQL.main("User", jTextField1.getText());
                 }else {
                 }
             } catch (IOException ex) {
-                Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.setVisible(false);  
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -283,21 +285,21 @@ public class WindowCreateRecord extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WindowCreateRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WindowCreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WindowCreateRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WindowCreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WindowCreateRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WindowCreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WindowCreateRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WindowCreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new WindowCreateRecord().setVisible(true);
+                    new WindowCreateUser().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(WindowCreateRecord.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
