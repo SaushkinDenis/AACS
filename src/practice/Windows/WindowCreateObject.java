@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import practice.CreateObject;
 import practice.CreateRecord;
 import practice.CreateRole;
+import practice.PostgreSQL;
 import practice.ReadXLS;
 import static practice.ReadXLS.answerOfRemove;
 
@@ -245,6 +246,7 @@ public class WindowCreateObject extends javax.swing.JFrame {
         
         try {
             CreateRecord.createRecord("2",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString());
+            PostgreSQL.createRecord("Object", jTextField1.getText());
             if (answerOfRemove){
                 if (!(name.equals("[]"))){
                 name = name.substring(1, name.length()-1);

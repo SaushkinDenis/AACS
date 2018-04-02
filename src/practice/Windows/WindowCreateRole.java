@@ -8,6 +8,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import practice.CreateRecord;
 import practice.CreateRole;
+import practice.PostgreSQL;
 import practice.ReadXLS;
 
 public class WindowCreateRole extends javax.swing.JFrame {
@@ -195,6 +196,7 @@ public class WindowCreateRole extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             CreateRecord.createRecord("1",jTextField1.getText(),jList1.getSelectedValuesList().toString(),jList4.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(),jList3.getSelectedValuesList().toString());
+            PostgreSQL.createRecord("Role", jTextField1.getText());
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateRole.class.getName()).log(Level.SEVERE, null, ex);
         }

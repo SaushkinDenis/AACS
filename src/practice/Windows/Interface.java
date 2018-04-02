@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.Node;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -22,7 +21,7 @@ public class Interface extends javax.swing.JFrame {
     protected ReadXLS RXLS;
     protected String[] allPosition, allActivities, allDepartment;
     protected String choiceRole = "", choiceAccount = "", choiceObject = "";
-    protected boolean control = false;
+    protected static boolean control = false;
     protected DefaultListModel listAccounts = new DefaultListModel();
     protected DefaultListModel listRoles = new DefaultListModel();
     protected DefaultListModel listObjects = new DefaultListModel();   
@@ -574,15 +573,12 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel15.setText("Роли имеющие доступ");
 
-        jTextField5.setText("jTextField5");
-
-        jTextField6.setText("jTextField6");
-
-        jTextField7.setText("jTextField7");
-
-        jTextField8.setText("jTextField8");
-
         jButton2.setText("Сохранить");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Отмена");
 
@@ -785,7 +781,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void CreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAccountActionPerformed
         WindowCreateUser.main(); 
-        UpdateListAccountsActionPerformed(null);
+        
     }//GEN-LAST:event_CreateAccountActionPerformed
 
     private void CreateObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateObjectActionPerformed
@@ -895,8 +891,10 @@ public class Interface extends javax.swing.JFrame {
         
         try {
             RXLS = new ReadXLS(2,choiseObjects[0].getLastPathComponent().toString(),"Подтвердите удаление записи.");
-            if (RXLS.answerOfRemove = false){
+            if (RXLS.answerOfRemove){
+                PostgreSQL.removeRecord("LISTOBJECTS","NAMEOBJECT",choiseObjects[0].getLastPathComponent().toString());
                 UpdateTreeObjectActionPerformed(null);
+                
             }
            
         } catch (IOException ex) {
@@ -947,10 +945,11 @@ public class Interface extends javax.swing.JFrame {
                 
                 RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
                 if (RXLS.answerOfRemove){
+                    PostgreSQL.removeRecord("LISTUSERS", "NAMEUSER", res1);
                     listAccounts.removeElement(res1);
                     CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
                     choiceRole = jTextFirstLastName.getText();
-                    PostgreSQL.main("User", jTextFirstLastName.getText());
+                    PostgreSQL.createRecord("User", jTextFirstLastName.getText());
                 }
             }
         } catch (IOException ex) {
@@ -980,6 +979,7 @@ public class Interface extends javax.swing.JFrame {
             RXLS = new ReadXLS (0,choiceAccount,"Подтвердите удаление записи.");
             if (RXLS.answerOfRemove){
                 listAccounts.removeElement(choiceAccount);
+                PostgreSQL.removeRecord("LISTUSERS","NAMEUSER",choiceAccount);
             }
 
         } catch (IOException ex) {
@@ -1057,6 +1057,7 @@ public class Interface extends javax.swing.JFrame {
             RXLS = new ReadXLS (1,choiceRole,"Подтвердите удаление записи.");
             if (RXLS.answerOfRemove){
                 listRoles.removeElement(choiceRole);
+                PostgreSQL.removeRecord("LISTROLE","NAMEROLE",choiceRole);
             }
         } catch (IOException ex) {
             Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
@@ -1163,6 +1164,7 @@ public class Interface extends javax.swing.JFrame {
                 if (RXLS.answerOfRemove){
                     listRoles.removeElement(res1);
                     CreateRecord.createRecord("1",jTextNameRole.getText(),jList4.getSelectedValuesList().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(), jList3.getSelectedValuesList().toString());
+                    PostgreSQL.createRecord("Role", jTextField1.getText());
                 }
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -1189,6 +1191,10 @@ public class Interface extends javax.swing.JFrame {
         } else control = false;
             
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        PostgreSQL.createRecord("Object", jTextField1.getText());
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     
     public static void main()  {

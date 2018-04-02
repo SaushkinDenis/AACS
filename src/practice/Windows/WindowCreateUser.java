@@ -20,6 +20,7 @@ public class WindowCreateUser extends javax.swing.JFrame {
     public String res = "";
     ReadXLS RXLS;
     String[] allPosition, allActivities, allDepartment;
+    boolean control;
 
     public WindowCreateUser() throws IOException {
         
@@ -223,6 +224,8 @@ public class WindowCreateUser extends javax.swing.JFrame {
         try {
             String role = LogisticsRole.setRole(jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString());
             if (!(role == "")){
+
+                if (Interface.control){
                 JOptionPane optionPaneFact = new JOptionPane();
                 UIManager.put("OptionPane.yesButtonText", "Да");
                 UIManager.put("OptionPane.noButtonText", "Нет");
@@ -239,10 +242,11 @@ public class WindowCreateUser extends javax.swing.JFrame {
                     case JOptionPane.CLOSED_OPTION:  break;
                     default: break;
                 }
+                
+                }
                 CreateRecord.createRecord("0",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText(),role);
                 res = jTextField1.getText();
-                PostgreSQL.main("User", jTextField1.getText());
-                }else {
+                PostgreSQL.createRecord("User", jTextField1.getText());
                 }
             } catch (IOException ex) {
                 Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -276,7 +280,6 @@ public class WindowCreateUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
     public static void main() {
-        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
