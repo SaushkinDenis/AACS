@@ -3,6 +3,8 @@ package practice.Windows;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -246,7 +248,11 @@ public class WindowCreateUser extends javax.swing.JFrame {
                 }
                 CreateRecord.createRecord("0",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText(),role);
                 res = jTextField1.getText();
-                PostgreSQL.createRecord("User", jTextField1.getText());
+                
+                String[] ar = {jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText(),role};
+                List<String> attribute = new ArrayList();
+                attribute = Arrays.asList(ar);
+                PostgreSQL.createRecord("User", jTextField1.getText(), attribute);
                 }
             } catch (IOException ex) {
                 Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);

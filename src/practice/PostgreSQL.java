@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
  
 public class PostgreSQL {
     
-    public static void main(String type, String nameRecord) throws SQLException {
+    public static void main() throws SQLException {
         //TestSQL m = new TestSQL();
         //m.TestDatabase();
         //createRecord(type, nameRecord);
@@ -19,7 +20,7 @@ public class PostgreSQL {
         //removeRecord("LISTUSERS");
     }
     
-    public static void createRecord(String type, String nameRecord){
+    public static void createRecord(String type, String nameRecord, List<String> attribute){
         Connection c;
         Statement stmt;
         ArrayList<String> text = new ArrayList<String>();
@@ -33,39 +34,54 @@ public class PostgreSQL {
            
             switch(type){
                 case "User": 
-                    text.add("NAMEUSER");
                     text.add("LISTUSERS");
+                    text.add("NAMEUSER");
+                    text.add("POSITION");
+                    text.add("DEPARTMENT");
+                    text.add("ACTIVITIES");
+                    text.add("PHONE");
+                    text.add("ROLE");
                     break;
                 case"Role": 
-                    text.add("NAMEROLE");
                     text.add("LISTROLE");
+                    text.add("NAMEROLE");
+                    text.add("POSITIONROLE");
+                    text.add("DEPARTMENTROLE");
+                    text.add("ACTIVITIESROLE");
                     break;
                 case "Object": 
-                    text.add("NAMEOBJECT");
                     text.add("LISTOBJECTS");
+                    text.add("NAMEOBJECT");
+                    text.add("TYPE");
+                    text.add("RELATIONS");
+                    text.add("ACCESSROLE");
                     break;
-            }
+                }
             
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT ID FROM " + text.get(1) + ";");
+            ResultSet rs = stmt.executeQuery( "SELECT ID FROM " + text.get(0) + ";");
             while ( rs.next() ) {
                 id = rs.getInt("id")+1;
             }
             
-            if (!PostgreSQL.findRecord(text.get(1),text.get(0),nameRecord)){
+            if (PostgreSQL.findRecord(text.get(0),text.get(1),nameRecord)){
+                PostgreSQL.removeRecord(text.get(0), text.get(1), nameRecord);
+            }
+                stmt = c.createStatement();
+                if (text.size()==5){
+                    sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','" +attribute.get(1) + "','" +attribute.get(2) + "');";
+                }else sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + "," + text.get(6) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "','" +attribute.get(4) + "');";
+                
+                stmt.executeUpdate(sql);
+                stmt.close();
+                c.commit();
+               
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println(e.getClass().getName()+": "+e.getMessage());
+                System.exit(0);
+            }   
 
-            stmt = c.createStatement();
-            sql = "INSERT INTO "+text.get(1)+" (ID," + text.get(0) + ") VALUES ("+id+", '"+nameRecord+"');";
-            stmt.executeUpdate(sql);
-            stmt.close();
-            c.commit();
-            }    
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
-            System.exit(0);
-        }   
-        
       
     }
     

@@ -2,6 +2,9 @@ package practice.Windows;
 
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -266,7 +269,12 @@ public class WindowCreateObject extends javax.swing.JFrame {
         
         try {
             CreateRecord.createRecord("2",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString());
-            PostgreSQL.createRecord("Object", jTextField1.getText());
+            
+            String[] ar = {jComboBox1.getSelectedItem().toString().substring(1, jComboBox1.getSelectedItem().toString().length()-1),jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1),jList2.getSelectedValuesList().toString().substring(1, jList2.getSelectedValuesList().toString().length()-1)};
+                List<String> attribute = new ArrayList();
+                attribute = Arrays.asList(ar);
+                PostgreSQL.createRecord("Object", jTextField1.getText(), attribute);
+
             if (answerOfRemove){
                 if (!(name.equals("[]"))){
                 name = name.substring(1, name.length()-1);
@@ -296,7 +304,6 @@ public class WindowCreateObject extends javax.swing.JFrame {
                                 RXLS = new ReadXLS(1,0,sname,2);
                                 for(String i:RXLS.srt){
                                     changeValue = i;
-                                    System.out.println(changeValue);
                                 }
                                 changeValue += ", " + jTextField1.getText();
                                 RXLS = new ReadXLS(1,num,2,changeValue);

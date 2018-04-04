@@ -4,6 +4,8 @@ import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -991,11 +993,15 @@ public class Interface extends javax.swing.JFrame {
 
                     RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
                     if (RXLS.answerOfRemove){
-                        PostgreSQL.removeRecord("LISTUSERS", "NAMEUSER", res1);
+                        //PostgreSQL.removeRecord("LISTUSERS", "NAMEUSER", res1);
                         listAccounts.removeElement(res1);
                         CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
                         choiceRole = jTextFirstLastName.getText();
-                        PostgreSQL.createRecord("User", jTextFirstLastName.getText());
+                        
+                        String[] ar = {jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role};
+                        List<String> attribute = new ArrayList();
+                        attribute = Arrays.asList(ar);
+                        PostgreSQL.createRecord("User", jTextFirstLastName.getText(), attribute);
                     }
                 }
             } catch (IOException ex) {
@@ -1209,10 +1215,16 @@ public class Interface extends javax.swing.JFrame {
             if (!jTextNameRole.getText().equals("")){
                 RXLS = new ReadXLS (1,res1,"Подтвердите редактирование записи");
                 if (RXLS.answerOfRemove){
-                    PostgreSQL.removeRecord("LISTROLE", "NAMEROLE", res1);
+                    //PostgreSQL.removeRecord("LISTROLE", "NAMEROLE", res1);
                     listRoles.removeElement(res1);
                     CreateRecord.createRecord("1",jTextNameRole.getText(),jList4.getSelectedValuesList().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(), jList3.getSelectedValuesList().toString());
-                    PostgreSQL.createRecord("Role", jTextNameRole.getText());
+                    
+                    
+                    String[] ar = {jList4.getSelectedValuesList().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(), jList3.getSelectedValuesList().toString()};
+                    List<String> attribute = new ArrayList();
+                    attribute = Arrays.asList(ar);
+                    PostgreSQL.createRecord("Role", jTextNameRole.getText(), attribute);
+
                 }
             }else JOptionPane.showConfirmDialog(null, "Заполните поля", "Внимание!",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE); 
 
@@ -1245,7 +1257,6 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PostgreSQL.createRecord("Object", jTextField1.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
     
     

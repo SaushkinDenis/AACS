@@ -2,6 +2,9 @@ package practice.Windows;
 
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -196,7 +199,11 @@ public class WindowCreateRole extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             CreateRecord.createRecord("1",jTextField1.getText(),jList1.getSelectedValuesList().toString(),jList4.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(),jList3.getSelectedValuesList().toString());
-            PostgreSQL.createRecord("Role", jTextField1.getText());
+            String[] ar = {jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1),jList4.getSelectedValuesList().toString().substring(1, jList4.getSelectedValuesList().toString().length()-1),jList2.getSelectedValuesList().toString().substring(1, jList2.getSelectedValuesList().toString().length()-1),jList3.getSelectedValuesList().toString().substring(1, jList3.getSelectedValuesList().toString().length()-1)};
+            List<String> attribute = new ArrayList();
+            attribute = Arrays.asList(ar);
+            PostgreSQL.createRecord("Role", jTextField1.getText(), attribute);
+
             this.setVisible(false);
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateRole.class.getName()).log(Level.SEVERE, null, ex);
