@@ -1,11 +1,13 @@
 package practice.Windows;
 
 import java.awt.Toolkit;
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -29,10 +31,12 @@ public class Interface extends javax.swing.JFrame {
     protected DefaultListModel listDepartment = new DefaultListModel();
     protected DefaultListModel listPosition = new DefaultListModel();
     protected DefaultTreeModel treeObjects;
-
+    protected DefaultListModel listObjectsControl = new DefaultListModel();
+    protected DefaultListModel listRole = new DefaultListModel();
+    
     
     public Interface() throws IOException {
-        
+       
         this.RXLS = new ReadXLS (0,0,"",0);
         for(String element:RXLS.srt) {
             if (!(listAccounts.contains(element))){
@@ -56,9 +60,12 @@ public class Interface extends javax.swing.JFrame {
         
         this.RXLS = new ReadXLS(2,1,"Направление деятельности",0);
         allActivities = RXLS.srt;
+
+        
         
         initComponents();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
+        
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture4.png")));
         this.setResizable(false);
         this.setTitle("Интеллектуальная Автоматизированная Система Разграничения Доступа");
     }
@@ -90,7 +97,6 @@ public class Interface extends javax.swing.JFrame {
         SaveChangesAccount = new javax.swing.JButton();
         jTextRole = new javax.swing.JTextField();
         jTextRole.setEditable(false);
-        ;
         jButton1 = new javax.swing.JButton();
         jToolBar4 = new javax.swing.JToolBar();
         jPanel4 = new javax.swing.JPanel();
@@ -136,6 +142,10 @@ public class Interface extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList5 = new javax.swing.JList();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jList6 = new javax.swing.JList();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -573,6 +583,8 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel15.setText("Роли имеющие доступ");
 
+        jTextField6.setEditable(false);
+
         jButton2.setText("Сохранить");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -582,11 +594,17 @@ public class Interface extends javax.swing.JFrame {
 
         jButton3.setText("Отмена");
 
+        jList5.setModel(listObjectsControl);
+        jScrollPane3.setViewportView(jList5);
+
+        jList6.setModel(listRole);
+        jScrollPane10.setViewportView(jList6);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(UpdateTreeObject)
@@ -597,52 +615,59 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jScrollPane4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField8))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel14)
+                            .addComponent(jTextField7)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField6)
+                            .addComponent(jTextField5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3))
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel15))
+                        .addGap(4, 4, 4)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane10)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UpdateTreeObject)
                     .addComponent(ChangeObject)
@@ -681,28 +706,32 @@ public class Interface extends javax.swing.JFrame {
 
         TabbedPane.addTab("Уведомления", jPanel2);
 
-        CreateAccount.setText("Новый пользователь");
+        CreateAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture1.png"))); // NOI18N
+        CreateAccount.setText("  Новый пользователь");
         CreateAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateAccountActionPerformed(evt);
             }
         });
 
-        CreateObject.setText("Новый объект");
+        CreateObject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture2.png"))); // NOI18N
+        CreateObject.setText("  Новый объект");
         CreateObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateObjectActionPerformed(evt);
             }
         });
 
-        CreateRole.setText("Новая роль");
+        CreateRole.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture3.png"))); // NOI18N
+        CreateRole.setText("  Новая роль");
         CreateRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateRoleActionPerformed(evt);
             }
         });
 
-        jToggleButton1.setText("Контроль ");
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture5.png"))); // NOI18N
+        jToggleButton1.setText("Контроль (off) ");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -741,29 +770,31 @@ public class Interface extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(CreateObject)
-                .addGap(18, 18, 18)
-                .addComponent(CreateRole)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CreateObject)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CreateRole)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CreateObject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CreateRole)
-                        .addComponent(jToggleButton1))
+                        .addComponent(CreateObject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CreateRole))
+                    .addComponent(jToggleButton1)
                     .addComponent(CreateAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
                 .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -801,6 +832,20 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_TabbedPaneMouseClicked
 
     private void ChangeObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeObjectActionPerformed
+        try {
+            this.RXLS = new ReadXLS(2,1,"Объект наблюдения",0);
+            for (String item:RXLS.srt){
+                listObjectsControl.addElement(item);
+            }
+            
+            this.RXLS = new ReadXLS(1,0,"",0);
+            for (String item:RXLS.srt){
+                listRole.addElement(item);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         choiceObject = jTreeObjects.getSelectionPath().getLastPathComponent().toString(); // jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
         String newItem = "";
         
@@ -906,55 +951,57 @@ public class Interface extends javax.swing.JFrame {
     private void SaveChangesAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveChangesAccountActionPerformed
 
         ArrayList setrole = new ArrayList();
-        String res1 = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
+        
+        if (!jTextFirstLastName.getText().equals("")){
+            String res1 = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
+            try {
 
-        try {
-
-            RXLS = new ReadXLS(1,0,"",0);
-            for (String item:RXLS.srt){
-                setrole.add(item);
+                RXLS = new ReadXLS(1,0,"",0);
+                for (String item:RXLS.srt){
+                    setrole.add(item);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        try {
-            String role = LogisticsRole.setRole(jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString());
-            if (!(role == "")){
-                JOptionPane optionPaneFact = new JOptionPane();
-                UIManager.put("OptionPane.yesButtonText", "Да");
-                UIManager.put("OptionPane.noButtonText", "Нет");
-                optionPaneFact.updateUI();
-                if (control == true){
-                    int result = optionPaneFact.showConfirmDialog(null, "Новому пользователю будет соответствовать следующая роль: "+role+ ". Выбрать роль вручную?", "Подтверждение роли!",
-                    optionPaneFact.YES_NO_OPTION, optionPaneFact.QUESTION_MESSAGE);
+            try {
+                String role = LogisticsRole.setRole(jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString());
+                if (!(role == "")){
+                    JOptionPane optionPaneFact = new JOptionPane();
+                    UIManager.put("OptionPane.yesButtonText", "Да");
+                    UIManager.put("OptionPane.noButtonText", "Нет");
+                    optionPaneFact.updateUI();
+                    if (control == true){
+                        int result = optionPaneFact.showConfirmDialog(null, "Новому пользователю будет соответствовать следующая роль: "+role+ ". Выбрать роль вручную?", "Подтверждение роли!",
+                        optionPaneFact.YES_NO_OPTION, optionPaneFact.QUESTION_MESSAGE);
 
-                    switch(result){
-                        case JOptionPane.YES_OPTION:
-                        Object changeRole = JOptionPane.showInputDialog(null,"Выберите роль","Выбор роли",JOptionPane.QUESTION_MESSAGE, null, setrole.toArray(), setrole.get(0) );
-                        role = (String) changeRole;
-                        break;
-                        case JOptionPane.NO_OPTION:
-                        break;
-                        case JOptionPane.CLOSED_OPTION:
-                        break;
-                        default:
-                        break;
+                        switch(result){
+                            case JOptionPane.YES_OPTION:
+                            Object changeRole = JOptionPane.showInputDialog(null,"Выберите роль","Выбор роли",JOptionPane.QUESTION_MESSAGE, null, setrole.toArray(), setrole.get(0) );
+                            role = (String) changeRole;
+                            break;
+                            case JOptionPane.NO_OPTION:
+                            break;
+                            case JOptionPane.CLOSED_OPTION:
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+
+                    RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
+                    if (RXLS.answerOfRemove){
+                        PostgreSQL.removeRecord("LISTUSERS", "NAMEUSER", res1);
+                        listAccounts.removeElement(res1);
+                        CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
+                        choiceRole = jTextFirstLastName.getText();
+                        PostgreSQL.createRecord("User", jTextFirstLastName.getText());
                     }
                 }
-                
-                RXLS = new ReadXLS (0,res1,"Подтвердите редактирование записи");
-                if (RXLS.answerOfRemove){
-                    PostgreSQL.removeRecord("LISTUSERS", "NAMEUSER", res1);
-                    listAccounts.removeElement(res1);
-                    CreateRecord.createRecord("0",jTextFirstLastName.getText(),jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role);
-                    choiceRole = jTextFirstLastName.getText();
-                    PostgreSQL.createRecord("User", jTextFirstLastName.getText());
-                }
+            } catch (IOException ex) {
+                Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }else JOptionPane.showConfirmDialog(null, "Заполните поля", "Внимание!",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE); 
         UpdateListAccountsActionPerformed(null);
     }//GEN-LAST:event_SaveChangesAccountActionPerformed
 
@@ -1158,14 +1205,17 @@ public class Interface extends javax.swing.JFrame {
     private void jSaveRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveRoleActionPerformed
 
         String res1 = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
-
         try {
+            if (!jTextNameRole.getText().equals("")){
                 RXLS = new ReadXLS (1,res1,"Подтвердите редактирование записи");
                 if (RXLS.answerOfRemove){
+                    PostgreSQL.removeRecord("LISTROLE", "NAMEROLE", res1);
                     listRoles.removeElement(res1);
                     CreateRecord.createRecord("1",jTextNameRole.getText(),jList4.getSelectedValuesList().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(), jList3.getSelectedValuesList().toString());
-                    PostgreSQL.createRecord("Role", jTextField1.getText());
+                    PostgreSQL.createRecord("Role", jTextNameRole.getText());
                 }
+            }else JOptionPane.showConfirmDialog(null, "Заполните поля", "Внимание!",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE); 
+
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1186,6 +1236,8 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxPostActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        jToggleButton1.setText((jToggleButton1.isSelected()) ? "Контроль (on)" : "Контроль (off)");
+
         if (jToggleButton1.isSelected()){
             control = true;
         } else control = false;
@@ -1249,6 +1301,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JList jList2;
     private javax.swing.JList jList3;
     private javax.swing.JList jList4;
+    private javax.swing.JList jList5;
+    private javax.swing.JList jList6;
     private javax.swing.JList jListAccounts;
     private javax.swing.JList jListRole;
     private javax.swing.JMenu jMenu1;
@@ -1261,7 +1315,9 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton jSaveRole;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;

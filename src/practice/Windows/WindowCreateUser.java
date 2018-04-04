@@ -31,7 +31,7 @@ public class WindowCreateUser extends javax.swing.JFrame {
         this.RXLS = new ReadXLS(2,1,"Направление деятельности",0);
         allActivities = RXLS.srt;
         initComponents();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture4.png")));
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setTitle("Интеллектуальная Автоматизированная Система Разграничения Доступа");
 

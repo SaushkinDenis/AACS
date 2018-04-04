@@ -15,18 +15,20 @@ import static practice.ReadXLS.answerOfRemove;
 
 public class WindowCreateObject extends javax.swing.JFrame {
     ReadXLS RXLS;
+    protected DefaultListModel listObjectsControl = new DefaultListModel();
+    protected DefaultListModel listRole = new DefaultListModel();
     
     public WindowCreateObject() throws IOException {
         this.RXLS = new ReadXLS(2,1,"Объект наблюдения",0);
         for (String item:RXLS.srt){
-            listModel.addElement(item);
+            listObjectsControl.addElement(item);
         }
         this.RXLS = new ReadXLS(1,0,"",0);
         for (String item:RXLS.srt){
-            listModel2.addElement(item);
+            listRole.addElement(item);
         }
         initComponents();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture4.png")));
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setTitle("Интеллектуальная Автоматизированная Система Разграничения Доступа");
     }
@@ -57,6 +59,8 @@ public class WindowCreateObject extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -112,9 +116,9 @@ public class WindowCreateObject extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Название");
+        jLabel1.setText("Название *");
 
-        jLabel2.setText("Тип");
+        jLabel2.setText("Тип *");
 
         jLabel4.setText("Роли имеющие доступ");
 
@@ -132,14 +136,15 @@ public class WindowCreateObject extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(listModel
-        );
+        jList1.setModel(listObjectsControl);
         jScrollPane1.setViewportView(jList1);
 
-        jList2.setModel(listModel2);
+        jList2.setModel(listRole);
         jScrollPane2.setViewportView(jList2);
 
         jLabel5.setText("наблюдения");
+
+        jLabel7.setText("* - обязательное поле для заполнения");
 
         jMenu1.setText("<- Назад");
         jMenu1.addMenuListener(new javax.swing.event.MenuListener() {
@@ -171,6 +176,9 @@ public class WindowCreateObject extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(84, 84, 84)
+                                        .addComponent(jLabel3))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addContainerGap()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jCheckBox1)
@@ -178,8 +186,8 @@ public class WindowCreateObject extends javax.swing.JFrame {
                                             .addComponent(jLabel2)
                                             .addComponent(jLabel1)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(84, 84, 84)
-                                        .addComponent(jLabel3)))
+                                        .addContainerGap()
+                                        .addComponent(jLabel6)))
                                 .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -196,6 +204,10 @@ public class WindowCreateObject extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,24 +220,32 @@ public class WindowCreateObject extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(6, 6, 6)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addGap(72, 72, 72)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addGap(37, 37, 37))))
         );
 
         pack();
@@ -369,8 +389,7 @@ public class WindowCreateObject extends javax.swing.JFrame {
             }
         });
     }
-    final DefaultListModel listModel = new DefaultListModel();
-    final DefaultListModel listModel2 = new DefaultListModel();
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -388,6 +407,8 @@ public class WindowCreateObject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
     private javax.swing.JMenu jMenu1;

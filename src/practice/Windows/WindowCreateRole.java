@@ -33,7 +33,7 @@ public class WindowCreateRole extends javax.swing.JFrame {
             listModel4.addElement(item);    
         }
         initComponents();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("picture4.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture4.png")));
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setTitle("Интеллектуальная Автоматизированная Система Разграничения Доступа");
     }
@@ -197,6 +197,7 @@ public class WindowCreateRole extends javax.swing.JFrame {
         try {
             CreateRecord.createRecord("1",jTextField1.getText(),jList1.getSelectedValuesList().toString(),jList4.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(),jList3.getSelectedValuesList().toString());
             PostgreSQL.createRecord("Role", jTextField1.getText());
+            this.setVisible(false);
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateRole.class.getName()).log(Level.SEVERE, null, ex);
         }
