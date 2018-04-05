@@ -337,14 +337,14 @@
                     <Component class="javax.swing.JComboBox" name="jComboBoxActivities">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new javax.swing.DefaultComboBoxModel(allActivities));&#xa;jComboBoxActivities.setEditable(false" type="code"/>
+                          <Connection code="new javax.swing.DefaultComboBoxModel(allActivities.toArray()));&#xa;jComboBoxActivities.setEditable(false" type="code"/>
                         </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="jComboBoxPost">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new javax.swing.DefaultComboBoxModel(allPosition));&#xa;jComboBoxPost.setEditable(false" type="code"/>
+                          <Connection code="new javax.swing.DefaultComboBoxModel(allPosition.toArray()));&#xa;jComboBoxPost.setEditable(false" type="code"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -357,7 +357,7 @@
                     <Component class="javax.swing.JComboBox" name="jComboBoxDepartment">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new javax.swing.DefaultComboBoxModel(allDepartment));&#xa;jComboBoxDepartment.setEditable(false" type="code"/>
+                          <Connection code="new javax.swing.DefaultComboBoxModel(allDepartment.toArray()));&#xa;jComboBoxDepartment.setEditable(false" type="code"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -947,6 +947,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43c;&#x435;&#x43d;&#x430;"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane3">
                   <AuxValues>

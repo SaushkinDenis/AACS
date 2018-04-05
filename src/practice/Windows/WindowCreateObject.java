@@ -270,7 +270,7 @@ public class WindowCreateObject extends javax.swing.JFrame {
         try {
             CreateRecord.createRecord("2",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jList1.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString());
             
-            String[] ar = {jComboBox1.getSelectedItem().toString().substring(1, jComboBox1.getSelectedItem().toString().length()-1),jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1),jList2.getSelectedValuesList().toString().substring(1, jList2.getSelectedValuesList().toString().length()-1)};
+            String[] ar = {jComboBox1.getSelectedItem().toString(),jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1),jList2.getSelectedValuesList().toString().substring(1, jList2.getSelectedValuesList().toString().length()-1)};
                 List<String> attribute = new ArrayList();
                 attribute = Arrays.asList(ar);
                 PostgreSQL.createRecord("Object", jTextField1.getText(), attribute);

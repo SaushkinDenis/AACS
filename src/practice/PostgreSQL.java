@@ -20,19 +20,9 @@ public class PostgreSQL {
         //removeRecord("LISTUSERS");
     }
     
-    public static void createRecord(String type, String nameRecord, List<String> attribute){
-        Connection c;
-        Statement stmt;
-        ArrayList<String> text = new ArrayList<String>();
-        
-        try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
-            c.setAutoCommit(false);
-            String sql;
-            int id = 0;
-           
-            switch(type){
+    public static ArrayList setType(String type){
+        ArrayList<String> text = new ArrayList();
+        switch(type){
                 case "User": 
                     text.add("LISTUSERS");
                     text.add("NAMEUSER");
@@ -45,6 +35,7 @@ public class PostgreSQL {
                 case"Role": 
                     text.add("LISTROLE");
                     text.add("NAMEROLE");
+                    text.add("ACCESSOBJECTS");
                     text.add("POSITIONROLE");
                     text.add("DEPARTMENTROLE");
                     text.add("ACTIVITIESROLE");
@@ -57,6 +48,22 @@ public class PostgreSQL {
                     text.add("ACCESSROLE");
                     break;
                 }
+        
+        return text;
+    }
+    public static void createRecord(String type, String nameRecord, List<String> attribute){
+        Connection c;
+        Statement stmt;
+        ArrayList<String> text = setType(type);
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
+            c.setAutoCommit(false);
+            String sql;
+            int id = 0;
+           
+            
             
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "SELECT ID FROM " + text.get(0) + ";");
@@ -70,8 +77,9 @@ public class PostgreSQL {
                 stmt = c.createStatement();
                 if (text.size()==5){
                     sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','" +attribute.get(1) + "','" +attribute.get(2) + "');";
-                }else sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + "," + text.get(6) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "','" +attribute.get(4) + "');";
-                
+                }else if (text.size() == 7) {sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + "," + text.get(6) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "','" +attribute.get(4) + "');";
+                }else sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "');";
+                    
                 stmt.executeUpdate(sql);
                 stmt.close();
                 c.commit();
@@ -149,24 +157,29 @@ public class PostgreSQL {
     }    
         return resultFind;
     }
-    public static ArrayList showEvent(){
+    
+    public static ArrayList showEvent(String type, String attributeFind, String rule, int outValues ){
         Connection c;
         Statement stmt;
         ArrayList result = new ArrayList();
+        ResultSet rs;
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
             c.setAutoCommit(false);
-
+            
+             ArrayList<String> text = setType(type);
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM LISTUSERS;" );
+            if (rule.isEmpty()){
+            rs = stmt.executeQuery( "SELECT * FROM "+ text.get(0)+";" );
+            } else rs = stmt.executeQuery( "SELECT * FROM "+ text.get(0)+" WHERE "+attributeFind+" = '"+rule+"';");
             while ( rs.next() ) {
-                int id = rs.getInt("id");
-                String  nameuser = rs.getString("nameuser");
+                //int id = rs.getInt("id");
+                String  nameuser = rs.getString(text.get(outValues));
                 //String  object = rs.getString("object");
                 //result.add(String.format("ID=%s NAMEEVENT=%s OBJECT=%s",id,nameevent,object));
-                result.add(String.format("ID=%s NAMEUSER=%s",id,nameuser));
-                result.add("");
+                result.add(nameuser);
+                //result.add("");
         }
         rs.close();
         stmt.close();
