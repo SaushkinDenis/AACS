@@ -11,8 +11,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
  
 public class PostgreSQL {
+    protected static Connection c;
+    protected static Statement stmt;
+    protected static String sql;
+    protected static ResultSet rs;
+
+
+    public static void setRs(ResultSet rs) {
+        PostgreSQL.rs = rs;
+    }
+
+    public static void setSql(String sql) {
+        PostgreSQL.sql = sql;
+    }
+
+    public static void setStmt() throws SQLException {
+        PostgreSQL.stmt = c.createStatement();
+    }
     
-    public static void main() throws SQLException {
+    public static void setC() throws ClassNotFoundException, SQLException {
+        Class.forName("org.postgresql.Driver");
+        c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
+        c.setAutoCommit(false);
+        
+        setStmt();
+    }
+
+    
+    
+    public static void main() {
         //TestSQL m = new TestSQL();
         //m.TestDatabase();
         //createRecord(type, nameRecord);
@@ -52,21 +79,14 @@ public class PostgreSQL {
         return text;
     }
     public static void createRecord(String type, String nameRecord, List<String> attribute){
-        Connection c;
-        Statement stmt;
         ArrayList<String> text = setType(type);
+        int id = 0;
         
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
-            c.setAutoCommit(false);
-            String sql;
-            int id = 0;
-           
+            setC();
+            setRs(stmt.executeQuery( "SELECT ID FROM " + text.get(0) + ";"));
             
             
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT ID FROM " + text.get(0) + ";");
             while ( rs.next() ) {
                 id = rs.getInt("id")+1;
             }
@@ -74,18 +94,17 @@ public class PostgreSQL {
             if (PostgreSQL.findRecord(text.get(0),text.get(1),nameRecord)){
                 PostgreSQL.removeRecord(text.get(0), text.get(1), nameRecord);
             }
-                stmt = c.createStatement();
+                setStmt();
                 if (text.size()==5){
-                    sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','" +attribute.get(1) + "','" +attribute.get(2) + "');";
-                }else if (text.size() == 7) {sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + "," + text.get(6) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "','" +attribute.get(4) + "');";
-                }else sql = "INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "');";
+                    setSql("INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','" +attribute.get(1) + "','" +attribute.get(2) + "');");
+                }else if (text.size() == 7) {setSql("INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + "," + text.get(6) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "','" +attribute.get(4) + "');");
+                }else setSql("INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "');");
                     
                 stmt.executeUpdate(sql);
                 stmt.close();
                 c.commit();
                
             } catch (Exception e) {
-                e.printStackTrace();
                 System.err.println(e.getClass().getName()+": "+e.getMessage());
                 System.exit(0);
             }   
@@ -95,24 +114,17 @@ public class PostgreSQL {
     
     
     public static void createEvent(String nameEvent, String object){
-        Connection c;
-        Statement stmt;
-        
+        int id = 0;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
-            c.setAutoCommit(false);
-            String sql;
-            int id = 0;
+            setC();
+            setRs(stmt.executeQuery( "SELECT ID FROM EVENT;" ));
             
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT ID FROM EVENT;" );
             while ( rs.next() ) {
                 id = rs.getInt("id")+1;
             }
             
-            stmt = c.createStatement();
-            sql = "INSERT INTO EVENT (ID,NAMEEVENT,OBJECT) VALUES ("+id+", '"+nameEvent+"', '"+object+"');";
+            setStmt();
+            setSql("INSERT INTO EVENT (ID,NAMEEVENT,OBJECT) VALUES ("+id+", '"+nameEvent+"', '"+object+"');");
             stmt.executeUpdate(sql);
             stmt.close();
             c.commit();
@@ -123,25 +135,31 @@ public class PostgreSQL {
             System.exit(0);
     }    
     
+        
     }
-    public static boolean findRecord(String place, String Attribute, String findValues){
+    
+    public static void updateSQL(String type, String attribute, String findValues){
+        ArrayList setType = setType(type);
+        //findRecord(place, attribute, findValues);
+        
+    }
+    public static void updateObject(){
+        
+        
+    }
+    public static boolean findRecord(String place, String attribute, String findValues){
         boolean resultFind = false;
         String  nameFind = "";
-        Connection c;
-        Statement stmt;
+        int id = 0;
         
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
-            c.setAutoCommit(false);
-
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM "+place+";" );
+            setC(); 
+            setRs(stmt.executeQuery( "SELECT * FROM "+place+";"));
             
             while ( rs.next() ) {
-                nameFind = rs.getString(Attribute);
+                nameFind = rs.getString(attribute);
                 if (nameFind.equals(findValues)){
-                    int id = rs.getInt("id");
+                    id = rs.getInt("id");
                     resultFind = true;
                 }
             }
@@ -159,20 +177,16 @@ public class PostgreSQL {
     }
     
     public static ArrayList showEvent(String type, String attributeFind, String rule, int outValues ){
-        Connection c;
-        Statement stmt;
         ArrayList result = new ArrayList();
-        ResultSet rs;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
-            c.setAutoCommit(false);
+            setC();
             
-             ArrayList<String> text = setType(type);
-            stmt = c.createStatement();
+            ArrayList<String> text = setType(type);
+            
             if (rule.isEmpty()){
-            rs = stmt.executeQuery( "SELECT * FROM "+ text.get(0)+";" );
+            setRs(stmt.executeQuery( "SELECT * FROM "+ text.get(0)+";"));
             } else rs = stmt.executeQuery( "SELECT * FROM "+ text.get(0)+" WHERE "+attributeFind+" = '"+rule+"';");
+            
             while ( rs.next() ) {
                 //int id = rs.getInt("id");
                 String  nameuser = rs.getString(text.get(outValues));
@@ -194,16 +208,11 @@ public class PostgreSQL {
     }        
             
     public static void removeRecord(String removeList, String removeUser, String removeAttribute){
-        Connection c;
-        Statement stmt;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
-            c.setAutoCommit(false);
-            String sql;
-            int id = 0;
-            stmt = c.createStatement();
-            sql = "DELETE FROM "+removeList+" WHERE " + removeUser + " = '" + removeAttribute + "';";
+            setC();
+            
+            setSql("DELETE FROM "+removeList+" WHERE " + removeUser + " = '" + removeAttribute + "';");
+            
             stmt.executeUpdate(sql);
             c.commit();
             stmt.close();
@@ -214,7 +223,17 @@ public class PostgreSQL {
             Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
         }     
 
-    }        
+    }  
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
     public static void TestDatabase() {
  
      Connection c;

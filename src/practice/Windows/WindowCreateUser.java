@@ -16,27 +16,24 @@ import practice.CreateRecord;
 import practice.LogisticsRole;
 import practice.PostgreSQL;
 import practice.ReadXLS;
+import static practice.Windows.Interface.allPosition;
+import static practice.Windows.Interface.allDepartment;
+import static practice.Windows.Interface.allActivities;
 
 public class WindowCreateUser extends javax.swing.JFrame {
-    private JButton jout;
-    public String res = "";
-    ReadXLS RXLS;
-    String[] allPosition, allActivities, allDepartment;
-    boolean control;
-
+    protected String res = "";
+    protected boolean control;
+    
     public WindowCreateUser() throws IOException {
         
-        this.RXLS = new ReadXLS(2,1,"Должность",0);
-        allPosition = RXLS.srt;
-        this.RXLS = new ReadXLS(2,1,"Отдел",0);
-        allDepartment = RXLS.srt;
-        this.RXLS = new ReadXLS(2,1,"Направление деятельности",0);
-        allActivities = RXLS.srt;
+        allPosition = PostgreSQL.showEvent("Object", "TYPE","Должность", 1); 
+        allDepartment = PostgreSQL.showEvent("Object","TYPE","Отдел", 1);
+        allActivities = PostgreSQL.showEvent("Object", "TYPE", "Направление деятельности", 1);
         initComponents();
+
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture4.png")));
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setTitle("Интеллектуальная Автоматизированная Система Разграничения Доступа");
-
     }
     
     @SuppressWarnings("unchecked")
@@ -95,7 +92,7 @@ public class WindowCreateUser extends javax.swing.JFrame {
 
         jLabel5.setText("Мобильный телефон");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(allPosition));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(Interface.allPosition.toArray()));
         jComboBox1.setEditable(true);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,10 +100,10 @@ public class WindowCreateUser extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(allDepartment));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(Interface.allDepartment.toArray()));
         jComboBox2.setEditable(true);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(allActivities));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(Interface.allActivities.toArray()));
         jComboBox3.setEditable(true);
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
