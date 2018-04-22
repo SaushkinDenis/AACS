@@ -165,7 +165,7 @@ public class Interface extends javax.swing.JFrame {
         jToolBar5.setRollover(true);
         jToolBar5.setAlignmentY(0.5F);
 
-        ChangeAccount.setText("Редактировать");
+        ChangeAccount.setText("Информация");
         ChangeAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeAccountActionPerformed(evt);
@@ -231,7 +231,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        SaveChangesAccount.setText("Сохранить");
+        SaveChangesAccount.setText("Редактировать");
         SaveChangesAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveChangesAccountActionPerformed(evt);
@@ -270,7 +270,7 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jTextPhoneNumber, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxActivities, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -366,7 +366,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        ChangeRole.setText("Редактировать");
+        ChangeRole.setText(" Информация");
         ChangeRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeRoleActionPerformed(evt);
@@ -397,7 +397,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jSaveRole.setText("Сохранить");
+        jSaveRole.setText("Редактировать");
         jSaveRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSaveRoleActionPerformed(evt);
@@ -482,12 +482,13 @@ public class Interface extends javax.swing.JFrame {
                                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addComponent(jTextNameRole, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSaveRole)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCancelSaveRole)))
+                        .addComponent(jSaveRole, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCancelSaveRole)
+                        .addGap(12, 12, 12)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -554,7 +555,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        ChangeObject.setText("Редактировать");
+        ChangeObject.setText("Информация");
         ChangeObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeObjectActionPerformed(evt);
@@ -578,7 +579,7 @@ public class Interface extends javax.swing.JFrame {
 
         jTextFieldType.setEditable(false);
 
-        jButton2.setText("Сохранить");
+        jButton2.setText("Редактировать");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -618,7 +619,7 @@ public class Interface extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(jTextField7)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -693,7 +694,7 @@ public class Interface extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -940,7 +941,6 @@ public class Interface extends javax.swing.JFrame {
                 setRole.add(item);
             }
 
-
             try {
                 String role = LogisticsRole.setRole(jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString());
                 if (!(role == "")){
@@ -998,37 +998,38 @@ public class Interface extends javax.swing.JFrame {
         
         choiceAccount = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
         jTextFirstLastName.setText(choiceAccount);
+        
         String newItem = null;
         
-            result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 2);
-            for(String element:result) {
-                newItem = element;
-            }
-            jComboBoxPost.setSelectedItem(newItem);
+        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 2);
+        for(String element:result) {
+            newItem = element;
+        }
+        jComboBoxPost.setSelectedItem(newItem);
 
-            result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 3);
-            for(String element:result) {
-                newItem = element;
-            }
-            jComboBoxDepartment.setSelectedItem(newItem);
+        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 3);
+        for(String element:result) {
+            newItem = element;
+        }
+        jComboBoxDepartment.setSelectedItem(newItem);
 
-            result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 4);
-            for(String element:result) {
-                newItem = element;
-            }
-            jComboBoxActivities.setSelectedItem(newItem);
+        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 4);
+        for(String element:result) {
+            newItem = element;
+        }
+        jComboBoxActivities.setSelectedItem(newItem);
 
-            result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 5);
-            for(String element:result) {
-                newItem = element;
-            }
-            jTextPhoneNumber.setText(newItem);
-           
-            result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 6);
-            for(String element:result) {
-                newItem = element;
-            }
-            jTextRole.setText(newItem);
+        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 5);
+        for(String element:result) {
+            newItem = element;
+        }
+        jTextPhoneNumber.setText(newItem);
+
+        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 6);
+        for(String element:result) {
+            newItem = element;
+        }
+        jTextRole.setText(newItem);
     }//GEN-LAST:event_ChangeAccountActionPerformed
 
     private void jTextRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRoleActionPerformed
@@ -1069,70 +1070,70 @@ public class Interface extends javax.swing.JFrame {
         choiceRole = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
         String newItem = "";
 
-            result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 1);
-            for(String element:result) {
-                newItem = element;
-            }
-            jTextNameRole.setText(newItem);
+        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 1);
+        for(String element:result) {
+            newItem = element;
+        }
+        jTextNameRole.setText(newItem);
 
-            result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 2);
-            for(String element:result) {
-                newItem = element;
-            }
-            jTextField1.setText(newItem);
+        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 2);
+        for(String element:result) {
+            newItem = element;
+        }
+        jTextField1.setText(newItem);
 
-            result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 3);
-            for(String element:result) {
-                newItem = element;
-            }
-            jTextField2.setText(newItem);
+        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 3);
+        for(String element:result) {
+            newItem = element;
+        }
+        jTextField2.setText(newItem);
 
-            result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 4);
-            for(String element:result) {
-                newItem = element;
-            }
-            jTextField3.setText(newItem);
+        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 4);
+        for(String element:result) {
+            newItem = element;
+        }
+        jTextField3.setText(newItem);
 
-            result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 5);
-            for(String element:result) {
-                newItem = element;
-            }
-            jTextField4.setText(newItem);
-            
-            result = PostgreSQL.showEvent("Object","TYPE", "Должность", 1);
-            for(String element:result) {
-                if(!listPosition.contains(element))
-                    listPosition.addElement(element);    
-            }
-            
-            result = PostgreSQL.showEvent("Object","TYPE", "Объект наблюдения", 1);
-            for (String element:result){
-                if(!listObjects.contains(element))
-                    listObjects.addElement(element);    
-            }
+        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 5);
+        for(String element:result) {
+            newItem = element;
+        }
+        jTextField4.setText(newItem);
 
-            result = PostgreSQL.showEvent("Object","TYPE", "Отдел", 1);
-            for (String element:result){
-                if(!listDepartment.contains(element))
-                    listDepartment.addElement(element);    
-            }
-            
-            result = PostgreSQL.showEvent("Object","TYPE", "Направление деятельности", 1);
-            for (String element:result){
-                if(!listActivities.contains(element))
-                    listActivities.addElement(element);    
-            }
+        result = PostgreSQL.showEvent("Object","TYPE", "Должность", 1);
+        for(String element:result) {
+            if(!listPosition.contains(element))
+                listPosition.addElement(element);    
+        }
+
+        result = PostgreSQL.showEvent("Object","TYPE", "Объект наблюдения", 1);
+        for (String element:result){
+            if(!listObjects.contains(element))
+                listObjects.addElement(element);    
+        }
+
+        result = PostgreSQL.showEvent("Object","TYPE", "Отдел", 1);
+        for (String element:result){
+            if(!listDepartment.contains(element))
+                listDepartment.addElement(element);    
+        }
+
+        result = PostgreSQL.showEvent("Object","TYPE", "Направление деятельности", 1);
+        for (String element:result){
+            if(!listActivities.contains(element))
+                listActivities.addElement(element);    
+        }
 
     }//GEN-LAST:event_ChangeRoleActionPerformed
 
     private void UpdateListRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListRoleActionPerformed
 
-            result = PostgreSQL.showEvent("Role","", "", 1);
-            for(String element:result) {
-                if (!(listRoles.contains(element))){
-                    listRoles.addElement(element);
-                }
+        result = PostgreSQL.showEvent("Role","", "", 1);
+        for(String element:result) {
+            if (!(listRoles.contains(element))){
+                listRoles.addElement(element);
             }
+        }
     }//GEN-LAST:event_UpdateListRoleActionPerformed
 
     private void jCancelSaveRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelSaveRoleActionPerformed
@@ -1151,18 +1152,19 @@ public class Interface extends javax.swing.JFrame {
 
         String res1 = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
 
-            if (!jTextNameRole.getText().equals("")){
-                
-                if (PostgreSQL.findRecord("LISTROLE", "NAMEROLE", res1)){
-                    listRoles.removeElement(res1);
-                    PostgreSQL.removeRecord("LISTROLE", "NAMEROLE", res1);
-                    String[] ar = {jList4.getSelectedValuesList().toString().substring(1, jList4.getSelectedValuesList().toString().length()-1),jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1),jList2.getSelectedValuesList().toString().substring(1, jList2.getSelectedValuesList().toString().length()-1), jList3.getSelectedValuesList().toString().substring(1, jList3.getSelectedValuesList().toString().length()-1)};
-                    List<String> attribute = new ArrayList();
-                    attribute = Arrays.asList(ar);
-                    PostgreSQL.createRecord("Role", jTextNameRole.getText(), attribute);
+        if (!jTextNameRole.getText().equals("")){
 
-                }
-            }else MessageBox.messMiss();
+            if (PostgreSQL.findRecord("LISTROLE", "NAMEROLE", res1)){
+                listRoles.removeElement(res1);
+                PostgreSQL.removeRecord("LISTROLE", "NAMEROLE", res1);
+                
+                String[] ar = {jList4.getSelectedValuesList().toString().substring(1, jList4.getSelectedValuesList().toString().length()-1),jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1),jList2.getSelectedValuesList().toString().substring(1, jList2.getSelectedValuesList().toString().length()-1), jList3.getSelectedValuesList().toString().substring(1, jList3.getSelectedValuesList().toString().length()-1)};
+                List<String> attribute = new ArrayList();
+                attribute = Arrays.asList(ar);
+                PostgreSQL.createRecord("Role", jTextNameRole.getText(), attribute);
+
+            }
+        }else MessageBox.messMiss();
 
         UpdateListRoleActionPerformed(null);
     }//GEN-LAST:event_jSaveRoleActionPerformed
@@ -1181,7 +1183,6 @@ public class Interface extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         jToggleButton1.setText((jToggleButton1.isSelected()) ? "Контроль (on)" : "Контроль (off)");
-
         if (jToggleButton1.isSelected()){
             control = true;
         } else control = false;
@@ -1193,16 +1194,15 @@ public class Interface extends javax.swing.JFrame {
         
         if (!jTextNameSaveObject.getText().equals("")){
             if (PostgreSQL.findRecord("LISTOBJECTS", "NAMEOBJECT", choiseObject)){
-                    jTreeObjects.removeSelectionPath(jTreeObjects.getSelectionPath());
-                    
-                    PostgreSQL.removeRecord("LISTOBJECTS", "NAMEOBJECT", choiseObject);
-                    String[] ar = {jTextFieldType.getText(),jListObjectsControl.getSelectedValuesList().toString().substring(1, jListObjectsControl.getSelectedValuesList().toString().length()-1),jListRoleforSave.getSelectedValuesList().toString().substring(1, jListRoleforSave.getSelectedValuesList().toString().length()-1)};
-                    List<String> attribute = new ArrayList();
-                    attribute = Arrays.asList(ar);
-                    PostgreSQL.createRecord("Object", jTextNameSaveObject.getText(), attribute);
-
-                }
-            }else MessageBox.messMiss();
+                jTreeObjects.removeSelectionPath(jTreeObjects.getSelectionPath());
+                PostgreSQL.removeRecord("LISTOBJECTS", "NAMEOBJECT", choiseObject);
+                
+                String[] ar = {jTextFieldType.getText(),jListObjectsControl.getSelectedValuesList().toString().substring(1, jListObjectsControl.getSelectedValuesList().toString().length()-1),jListRoleforSave.getSelectedValuesList().toString().substring(1, jListRoleforSave.getSelectedValuesList().toString().length()-1)};
+                List<String> attribute = new ArrayList();
+                attribute = Arrays.asList(ar);
+                PostgreSQL.createRecord("Object", jTextNameSaveObject.getText(), attribute);
+            }
+        }else MessageBox.messMiss();
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1215,8 +1215,7 @@ public class Interface extends javax.swing.JFrame {
         listObjectsControl.removeAllElements();
 
     }//GEN-LAST:event_jButton3ActionPerformed
-    
-    
+
     public static void main()  {
         java.awt.EventQueue.invokeLater(() -> {
             try {

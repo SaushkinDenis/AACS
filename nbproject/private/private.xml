@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
-        <file>
-            <url>src/practice/Windows/Interface.java</url>
-            <bookmark id="2">
-                <name/>
-                <line>1212</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/NetBeans/Practice/src/practice/Windows/WindowCreateRole.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/main.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/CreateRecord.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/Windows/Interface.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/PostgreSQL.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/LogisticsRole.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/Windows/WindowCreateUser.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/ReadXLS.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/CreateXLS.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/Windows/WindowCreateObject.java</file>
-            <file>file:/D:/NetBeans/Practice/src/practice/General.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

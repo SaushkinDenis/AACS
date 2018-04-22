@@ -17,6 +17,7 @@ public class PostgreSQL {
     protected static ResultSet rs;
 
 
+    
     public static void setRs(ResultSet rs) {
         PostgreSQL.rs = rs;
     }
@@ -36,45 +37,44 @@ public class PostgreSQL {
         
         setStmt();
     }
-
+    
+    public static Connection getC() {
+        return c;
+    }
     
     
-    public static void main() {
-        //TestSQL m = new TestSQL();
-        //m.TestDatabase();
-        //createRecord(type, nameRecord);
+    public static void main() throws ClassNotFoundException, SQLException {
         
-        //removeRecord("LISTUSERS");
     }
     
     public static ArrayList setType(String type){
         ArrayList<String> text = new ArrayList();
         switch(type){
-                case "User": 
-                    text.add("LISTUSERS");
-                    text.add("NAMEUSER");
-                    text.add("POSITION");
-                    text.add("DEPARTMENT");
-                    text.add("ACTIVITIES");
-                    text.add("PHONE");
-                    text.add("ROLE");
-                    break;
-                case"Role": 
-                    text.add("LISTROLE");
-                    text.add("NAMEROLE");
-                    text.add("ACCESSOBJECTS");
-                    text.add("POSITIONROLE");
-                    text.add("DEPARTMENTROLE");
-                    text.add("ACTIVITIESROLE");
-                    break;
-                case "Object": 
-                    text.add("LISTOBJECTS");
-                    text.add("NAMEOBJECT");
-                    text.add("TYPE");
-                    text.add("RELATIONS");
-                    text.add("ACCESSROLE");
-                    break;
-                }
+            case "User": 
+                text.add("LISTUSERS");
+                text.add("NAMEUSER");
+                text.add("POSITION");
+                text.add("DEPARTMENT");
+                text.add("ACTIVITIES");
+                text.add("PHONE");
+                text.add("ROLE");
+                break;
+            case"Role": 
+                text.add("LISTROLE");
+                text.add("NAMEROLE");
+                text.add("ACCESSOBJECTS");
+                text.add("POSITIONROLE");
+                text.add("DEPARTMENTROLE");
+                text.add("ACTIVITIESROLE");
+                break;
+            case "Object": 
+                text.add("LISTOBJECTS");
+                text.add("NAMEOBJECT");
+                text.add("TYPE");
+                text.add("RELATIONS");
+                text.add("ACCESSROLE");
+                break;
+            }
         
         return text;
     }
@@ -103,6 +103,7 @@ public class PostgreSQL {
                 stmt.executeUpdate(sql);
                 stmt.close();
                 c.commit();
+                c.close();
                
             } catch (Exception e) {
                 System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -116,7 +117,8 @@ public class PostgreSQL {
     public static void createEvent(String nameEvent, String object){
         int id = 0;
         try {
-            setC();
+            //setC();
+            getC();
             setRs(stmt.executeQuery( "SELECT ID FROM EVENT;" ));
             
             while ( rs.next() ) {
@@ -128,6 +130,7 @@ public class PostgreSQL {
             stmt.executeUpdate(sql);
             stmt.close();
             c.commit();
+            c.close();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,6 +157,7 @@ public class PostgreSQL {
         
         try {
             setC(); 
+  
             setRs(stmt.executeQuery( "SELECT * FROM "+place+";"));
             
             while ( rs.next() ) {
@@ -167,6 +171,7 @@ public class PostgreSQL {
             rs.close();
             stmt.close();
             c.commit();
+            c.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -180,7 +185,7 @@ public class PostgreSQL {
         ArrayList result = new ArrayList();
         try {
             setC();
-            
+
             ArrayList<String> text = setType(type);
             
             if (rule.isEmpty()){
@@ -198,6 +203,7 @@ public class PostgreSQL {
         rs.close();
         stmt.close();
         c.commit();
+        c.close();
     
         } catch (Exception e) {
             e.printStackTrace();
@@ -209,16 +215,16 @@ public class PostgreSQL {
             
     public static void removeRecord(String removeList, String removeUser, String removeAttribute){
         try {
-            setC();
-            
+            //setC();
+            getC();
             setSql("DELETE FROM "+removeList+" WHERE " + removeUser + " = '" + removeAttribute + "';");
             
             stmt.executeUpdate(sql);
             c.commit();
             stmt.close();
             c.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+        //} catch (ClassNotFoundException ex) {
+        //    Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
         }     
