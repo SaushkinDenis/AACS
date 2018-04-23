@@ -103,16 +103,16 @@ public class WindowCreateRole extends javax.swing.JFrame {
 
         jLabel6.setText("Доступ к объектам наблюдения");
 
-        jList1.setModel(Interface.listObjects);
+        jList1.setModel(listObjects);
         jScrollPane1.setViewportView(jList1);
 
-        jList2.setModel(Interface.listDepartment);
+        jList2.setModel(listDepartment);
         jScrollPane2.setViewportView(jList2);
 
-        jList3.setModel(Interface.listActivities);
+        jList3.setModel(listActivities);
         jScrollPane3.setViewportView(jList3);
 
-        jList4.setModel(Interface.listPosition);
+        jList4.setModel(listPosition);
         jScrollPane4.setViewportView(jList4);
 
         jMenu2.setText("<- Назад");

@@ -171,7 +171,7 @@
         <Component class="javax.swing.JList" name="jList1">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Interface.listObjects" type="code"/>
+              <Connection code="listObjects" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -187,7 +187,7 @@
         <Component class="javax.swing.JList" name="jList2">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Interface.listDepartment" type="code"/>
+              <Connection code="listDepartment" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -203,7 +203,7 @@
         <Component class="javax.swing.JList" name="jList3">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Interface.listActivities" type="code"/>
+              <Connection code="listActivities" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -219,7 +219,7 @@
         <Component class="javax.swing.JList" name="jList4">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Interface.listPosition" type="code"/>
+              <Connection code="listPosition" type="code"/>
             </Property>
           </Properties>
         </Component>
