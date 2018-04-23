@@ -9,39 +9,51 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import practice.CreateRecord;
-import practice.CreateRole;
+import practice.MessageBox;
 import practice.PostgreSQL;
-import practice.ReadXLS;
+
 
 public class WindowCreateRole extends javax.swing.JFrame {
-    ReadXLS RXLS;
+    protected static ArrayList<String> allPosition, allActivities, allDepartment, allObjects;
+    protected static DefaultListModel listObjects = new DefaultListModel();   
+    protected static DefaultListModel listActivities = new DefaultListModel();
+    protected static DefaultListModel listDepartment = new DefaultListModel();
+    protected static DefaultListModel listPosition = new DefaultListModel();
     
     public WindowCreateRole() throws IOException  {
-        this.RXLS = new ReadXLS(2,1,"Объект наблюдения",0);
-        for (String item:RXLS.srt){
-            listModel1.addElement(item);    
-        }
-        this.RXLS = new ReadXLS(2,1,"Должность",0);
-        for (String item:RXLS.srt){
-            listModel2.addElement(item);    
+        
+        allObjects = PostgreSQL.showRecord("Object", "TYPE","Объект наблюдения", 1); 
+        allPosition = PostgreSQL.showRecord("Object", "TYPE","Должность", 1); 
+        allDepartment = PostgreSQL.showRecord("Object","TYPE","Отдел", 1);
+        allActivities = PostgreSQL.showRecord("Object", "TYPE", "Направление деятельности", 1);
+        
+        for(String element:allPosition) {
+            if(!listPosition.contains(element))
+                listPosition.addElement(element);
         }
         
-        this.RXLS = new ReadXLS(2,1,"Отдел",0);
-        for (String item:RXLS.srt){
-            listModel3.addElement(item);    
+        for (String element:allObjects){
+            if(!listObjects.contains(element))
+                listObjects.addElement(element);
         }
-        this.RXLS = new ReadXLS(2,1,"Направление деятельности",0);
-        for (String item:RXLS.srt){
-            listModel4.addElement(item);    
+        
+        for (String element:allDepartment){
+            if(!listDepartment.contains(element))
+                listDepartment.addElement(element);
         }
+        
+        for (String element:allActivities){
+            if(!listActivities.contains(element))
+                listActivities.addElement(element);
+        }
+        
         initComponents();
+        
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture4.png")));
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setTitle("Интеллектуальная Автоматизированная Система Разграничения Доступа");
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -50,7 +62,7 @@ public class WindowCreateRole extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextNameRole = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -75,12 +87,6 @@ public class WindowCreateRole extends javax.swing.JFrame {
 
         jLabel5.setText("Отделы");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Сохранить");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,16 +103,16 @@ public class WindowCreateRole extends javax.swing.JFrame {
 
         jLabel6.setText("Доступ к объектам наблюдения");
 
-        jList1.setModel(listModel1);
+        jList1.setModel(Interface.listObjects);
         jScrollPane1.setViewportView(jList1);
 
-        jList2.setModel(listModel3);
+        jList2.setModel(Interface.listDepartment);
         jScrollPane2.setViewportView(jList2);
 
-        jList3.setModel(listModel4);
+        jList3.setModel(Interface.listActivities);
         jScrollPane3.setViewportView(jList3);
 
-        jList4.setModel(listModel2);
+        jList4.setModel(Interface.listPosition);
         jScrollPane4.setViewportView(jList4);
 
         jMenu2.setText("<- Назад");
@@ -117,11 +123,6 @@ public class WindowCreateRole extends javax.swing.JFrame {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
                 jMenu2MenuSelected(evt);
-            }
-        });
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
             }
         });
         jMenuBar1.add(jMenu2);
@@ -149,7 +150,7 @@ public class WindowCreateRole extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1)))
+                                .addComponent(jTextNameRole)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -174,7 +175,7 @@ public class WindowCreateRole extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextNameRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addGap(28, 28, 28)
@@ -197,64 +198,32 @@ public class WindowCreateRole extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            CreateRecord.createRecord("1",jTextField1.getText(),jList1.getSelectedValuesList().toString(),jList4.getSelectedValuesList().toString(),jList2.getSelectedValuesList().toString(),jList3.getSelectedValuesList().toString());
-            String[] ar = {jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1),jList4.getSelectedValuesList().toString().substring(1, jList4.getSelectedValuesList().toString().length()-1),jList2.getSelectedValuesList().toString().substring(1, jList2.getSelectedValuesList().toString().length()-1),jList3.getSelectedValuesList().toString().substring(1, jList3.getSelectedValuesList().toString().length()-1)};
-            List<String> attribute = new ArrayList();
-            attribute = Arrays.asList(ar);
-            PostgreSQL.createRecord("Role", jTextField1.getText(), attribute);
-
-            this.setVisible(false);
-        } catch (IOException ex) {
-            Logger.getLogger(WindowCreateRole.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        if (PostgreSQL.findRecord("LISTROLE", "NAMEROLE", jTextNameRole.getText()))
+            if (!MessageBox.messChange()){
+                MessageBox.messMiss();
+                WindowCreateRole.main();    
+            }
+        String[] ar = {jList1.getSelectedValuesList().toString().substring(1, jList1.getSelectedValuesList().toString().length()-1),jList4.getSelectedValuesList().toString().substring(1, jList4.getSelectedValuesList().toString().length()-1),jList2.getSelectedValuesList().toString().substring(1, jList2.getSelectedValuesList().toString().length()-1),jList3.getSelectedValuesList().toString().substring(1, jList3.getSelectedValuesList().toString().length()-1)};
+        List<String> attribute;
+        attribute = Arrays.asList(ar);
+                
+        PostgreSQL.createRecord("Role", jTextNameRole.getText(), attribute);
+        
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-
-    }//GEN-LAST:event_jMenu2ActionPerformed
-
     private void jMenu2MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu2MenuSelected
        this.setVisible(false);
     }//GEN-LAST:event_jMenu2MenuSelected
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main() {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WindowCreateRole.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WindowCreateRole.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WindowCreateRole.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WindowCreateRole.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     new WindowCreateRole().setVisible(true);
@@ -264,10 +233,6 @@ public class WindowCreateRole extends javax.swing.JFrame {
             }
         });
     }
-     final DefaultListModel listModel1 = new DefaultListModel();
-     final DefaultListModel listModel2 = new DefaultListModel();
-     final DefaultListModel listModel3 = new DefaultListModel();
-     final DefaultListModel listModel4 = new DefaultListModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -286,6 +251,6 @@ public class WindowCreateRole extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextNameRole;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,6 +2,7 @@ package practice;
  
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,44 +12,38 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
  
 public class PostgreSQL {
-    protected static Connection c;
-    protected static Statement stmt;
+    protected static Connection connection;
+    //Для использования SQL запросов существуют 3 типа объектов:
+    protected static Statement stmt;                               //1.Statement: используется для простых случаев без параметров
+    //protected static PreparedStatement preparedStatement = null; //2.PreparedStatement: предварительно компилирует запросы, которые могут содержать входные параметры
     protected static String sql;
     protected static ResultSet rs;
+    public static int id;
 
-
+    public static void setConnection() throws ClassNotFoundException, SQLException {
+        //Загрузка драйвера
+        Class.forName("org.postgresql.Driver");
+        //Создание соединения
+        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
+        connection.setAutoCommit(false);
+        setStmt();
+    }
+    
+    public static void setStmt() throws SQLException {
+        PostgreSQL.stmt = connection.createStatement();
+    }
+    
+    public static void setSql(String sql) {
+        PostgreSQL.sql = sql;
+    }
     
     public static void setRs(ResultSet rs) {
         PostgreSQL.rs = rs;
     }
-
-    public static void setSql(String sql) {
-        PostgreSQL.sql = sql;
-    }
-
-    public static void setStmt() throws SQLException {
-        PostgreSQL.stmt = c.createStatement();
-    }
-    
-    public static void setC() throws ClassNotFoundException, SQLException {
-        Class.forName("org.postgresql.Driver");
-        c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/generaldb","postgres", "postgres");
-        c.setAutoCommit(false);
-        
-        setStmt();
-    }
-    
-    public static Connection getC() {
-        return c;
-    }
-    
-    
-    public static void main() throws ClassNotFoundException, SQLException {
-        
-    }
     
     public static ArrayList setType(String type){
         ArrayList<String> text = new ArrayList();
+        
         switch(type){
             case "User": 
                 text.add("LISTUSERS");
@@ -75,50 +70,64 @@ public class PostgreSQL {
                 text.add("ACCESSROLE");
                 break;
             }
-        
         return text;
     }
-    public static void createRecord(String type, String nameRecord, List<String> attribute){
+    
+    //----------------  Создание новой записи --------------------------
+    public static void createRecord(String type, String nameRecord, List<String> attribute){ 
+        
         ArrayList<String> text = setType(type);
-        int id = 0;
         
         try {
-            setC();
+            setConnection();
+            //Выполним запрос
             setRs(stmt.executeQuery( "SELECT ID FROM " + text.get(0) + ";"));
-            
-            
+            //Поиск последнего id
             while ( rs.next() ) {
                 id = rs.getInt("id")+1;
             }
-            
+            //Уничтожение записи, вслучае ее существования
             if (PostgreSQL.findRecord(text.get(0),text.get(1),nameRecord)){
                 PostgreSQL.removeRecord(text.get(0), text.get(1), nameRecord);
             }
-                setStmt();
-                if (text.size()==5){
+            
+            setStmt();
+            switch(text.get(0)){
+                case "LISTUSERS" :
+                    setSql("INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + "," + text.get(6) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "','" +attribute.get(4) + "');");
+                    break;
+                case "LISTROLE" :
+                    setSql("INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "');");
+                    break;
+                case "LISTOBJECTS" :
                     setSql("INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','" +attribute.get(1) + "','" +attribute.get(2) + "');");
-                }else if (text.size() == 7) {setSql("INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + "," + text.get(6) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "','" +attribute.get(4) + "');");
-                }else setSql("INSERT INTO "+text.get(0)+" (ID," + text.get(1) + "," + text.get(2) + "," + text.get(3) + ","+ text.get(4) + ","+ text.get(5) + ") VALUES ("+id+", '"+nameRecord+"','" + attribute.get(0) + "','"+attribute.get(1) + "','" +attribute.get(2) +"','"+attribute.get(3) + "');");
-                    
-                stmt.executeUpdate(sql);
-                stmt.close();
-                c.commit();
-                c.close();
-               
-            } catch (Exception e) {
-                System.err.println(e.getClass().getName()+": "+e.getMessage());
-                System.exit(0);
-            }   
-
-      
+                    break;
+            }
+            // Вставить запись
+            stmt.executeUpdate(sql);
+                   
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
+            
+        } finally {
+            if (connection != null) {
+                try {
+                    rs.close();
+                    stmt.close();
+                    connection.commit();
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+            }
+        }
     }
     
-    
     public static void createEvent(String nameEvent, String object){
-        int id = 0;
+        
         try {
-            //setC();
-            getC();
+            setConnection();
             setRs(stmt.executeQuery( "SELECT ID FROM EVENT;" ));
             
             while ( rs.next() ) {
@@ -128,36 +137,66 @@ public class PostgreSQL {
             setStmt();
             setSql("INSERT INTO EVENT (ID,NAMEEVENT,OBJECT) VALUES ("+id+", '"+nameEvent+"', '"+object+"');");
             stmt.executeUpdate(sql);
-            stmt.close();
-            c.commit();
-            c.close();
+
             
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName()+": "+e.getMessage());
             System.exit(0);
-    }    
+        } finally {
+            if (connection != null) {
+                try {
+                    rs.close();
+                    stmt.close();
+                    connection.commit();
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+            }
+        }   
     
         
     }
     
-    public static void updateSQL(String type, String attribute, String findValues){
-        ArrayList setType = setType(type);
-        //findRecord(place, attribute, findValues);
+    public static void updateSQL(String type, String attribute, String values, String id){
+        
+        try{
+            setConnection();
+            
+            setStmt();
+            setSql("UPDATE "+type+" SET "+attribute+" = "+values+" WHERE id = "+id+";");
+            stmt.executeUpdate(sql);
+        
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
+        } finally {
+            if (connection != null) {
+                try {
+                    rs.close();
+                    stmt.close();
+                    connection.commit();
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+            }
+        } 
+        
         
     }
+    
     public static void updateObject(){
-        
-        
+               
     }
+    
     public static boolean findRecord(String place, String attribute, String findValues){
         boolean resultFind = false;
-        String  nameFind = "";
-        int id = 0;
-        
+        String  nameFind;
+
+               
         try {
-            setC(); 
-  
+            setConnection(); 
             setRs(stmt.executeQuery( "SELECT * FROM "+place+";"));
             
             while ( rs.next() ) {
@@ -170,76 +209,68 @@ public class PostgreSQL {
             
             rs.close();
             stmt.close();
-            c.commit();
-            c.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName()+": "+e.getMessage());
             System.exit(0);
-    }    
+        }    
         return resultFind;
     }
     
-    public static ArrayList showEvent(String type, String attributeFind, String rule, int outValues ){
+    public static ArrayList<String> showRecord(String type, String attributeFind, String rule, int outValues ){
+        
         ArrayList result = new ArrayList();
+        ArrayList<String> text = setType(type);
         try {
-            setC();
-
-            ArrayList<String> text = setType(type);
+            setConnection();
             
             if (rule.isEmpty()){
-            setRs(stmt.executeQuery( "SELECT * FROM "+ text.get(0)+";"));
-            } else rs = stmt.executeQuery( "SELECT * FROM "+ text.get(0)+" WHERE "+attributeFind+" = '"+rule+"';");
+                setRs(stmt.executeQuery( "SELECT * FROM "+ text.get(0)+";"));
+            } else setRs(stmt.executeQuery( "SELECT * FROM "+ text.get(0)+" WHERE "+attributeFind+" = '"+rule+"';"));
             
             while ( rs.next() ) {
-                //int id = rs.getInt("id");
                 String  nameuser = rs.getString(text.get(outValues));
-                //String  object = rs.getString("object");
+                //int id = rs.getInt("id");
                 //result.add(String.format("ID=%s NAMEEVENT=%s OBJECT=%s",id,nameevent,object));
                 result.add(nameuser);
-                //result.add("");
-        }
-        rs.close();
-        stmt.close();
-        c.commit();
-        c.close();
-    
-        } catch (Exception e) {
-            e.printStackTrace();
+            }
+        
+        } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName()+": "+e.getMessage());
             System.exit(0);
-    }    
-    return result;
+        
+        } finally {
+            if (connection != null) {
+                try {
+                    rs.close();
+                    stmt.close();
+                    connection.commit();
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+            }
+        }
+        return result;
     }        
             
-    public static void removeRecord(String removeList, String removeUser, String removeAttribute){
+    public static void removeRecord(String removeList, String removePlace, String removeAttribute){
         try {
-            //setC();
-            getC();
-            setSql("DELETE FROM "+removeList+" WHERE " + removeUser + " = '" + removeAttribute + "';");
-            
+            setConnection();
+            setSql("DELETE FROM "+removeList+" WHERE " + removePlace + " = '" + removeAttribute + "';");
             stmt.executeUpdate(sql);
-            c.commit();
+            
+            rs.close();
             stmt.close();
-            c.close();
-        //} catch (ClassNotFoundException ex) {
-        //    Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            connection.commit();
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
         }     
-
     }  
     
   
     
-    
-    
-    
-    
-    
-    
-    
+// =================== BACK =================
     public static void TestDatabase() {
  
      Connection c;

@@ -1,7 +1,6 @@
 package practice.Windows;
 
 import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,29 +8,24 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
-import practice.CreateRecord;
 import practice.LogisticsRole;
 import practice.MessageBox;
 import practice.PostgreSQL;
-import practice.ReadXLS;
 
 public class Interface extends javax.swing.JFrame {
     
-    protected static ArrayList allPosition, allActivities, allDepartment;
+    protected static ArrayList<String> allPosition, allActivities, allDepartment, allObjects;
     protected String choiceRole = "", choiceAccount = "", choiceObject = "";
     protected static boolean control = false;
-    protected DefaultListModel listAccounts = new DefaultListModel();
-    protected DefaultListModel listRoles = new DefaultListModel();
-    protected DefaultListModel listObjects = new DefaultListModel();   
-    protected DefaultListModel listActivities = new DefaultListModel();
-    protected DefaultListModel listDepartment = new DefaultListModel();
-    protected DefaultListModel listPosition = new DefaultListModel();
+    protected static DefaultListModel listAccounts = new DefaultListModel();
+    protected static DefaultListModel listRoles = new DefaultListModel();
+    protected static DefaultListModel listObjects = new DefaultListModel();   
+    protected static DefaultListModel listActivities = new DefaultListModel();
+    protected static DefaultListModel listDepartment = new DefaultListModel();
+    protected static DefaultListModel listPosition = new DefaultListModel();
     protected DefaultTreeModel treeObjects;
     protected DefaultListModel listObjectsControl = new DefaultListModel();
     protected DefaultListModel listRole = new DefaultListModel();
@@ -39,14 +33,14 @@ public class Interface extends javax.swing.JFrame {
     
     public Interface() throws IOException {
         //Формирование списка пользователей 
-        result = PostgreSQL.showEvent("User","","",1);
+        result = PostgreSQL.showRecord("User","","",1);
         for(String element:result) {
             if (!(listAccounts.contains(element))){
                 listAccounts.addElement(element);
             }
         }
         //Формирование списка ролей
-        result = PostgreSQL.showEvent("Role","","",1);
+        result = PostgreSQL.showRecord("Role","","",1);
         for(String element:result) {
             if (!(listRoles.contains(element))){
                 listRoles.addElement(element);
@@ -832,13 +826,13 @@ public class Interface extends javax.swing.JFrame {
 
     private void ChangeObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeObjectActionPerformed
 
-        result = PostgreSQL.showEvent("Object","TYPE","Объект наблюдения", 1);
+        result = PostgreSQL.showRecord("Object","TYPE","Объект наблюдения", 1);
         for (String item:result){
             if (!listObjectsControl.contains(item))
                 listObjectsControl.addElement(item);
         }
             
-        result = PostgreSQL.showEvent("Role","", "", 1);
+        result = PostgreSQL.showRecord("Role","", "", 1);
         for (String item:result){
             if (!listRole.contains(item))
                  listRole.addElement(item);
@@ -847,26 +841,26 @@ public class Interface extends javax.swing.JFrame {
         choiceObject = jTreeObjects.getSelectionPath().getLastPathComponent().toString();
         String newItem = "";
         
-        result = PostgreSQL.showEvent("Object","NAMEOBJECT", choiceObject, 1);
+        result = PostgreSQL.showRecord("Object","NAMEOBJECT", choiceObject, 1);
         for(String element:result) {
             newItem = element;
         }
         
         jTextNameSaveObject.setText(newItem);
 
-        result = PostgreSQL.showEvent("Object","NAMEOBJECT", choiceObject, 2);
+        result = PostgreSQL.showRecord("Object","NAMEOBJECT", choiceObject, 2);
         for(String element:result) {
             newItem = element;
         }
         jTextFieldType.setText(newItem);
 
-        result = PostgreSQL.showEvent("Object", "NAMEOBJECT", choiceObject, 3);
+        result = PostgreSQL.showRecord("Object", "NAMEOBJECT", choiceObject, 3);
         for(String element:result) {
             newItem = element;
         }
         jTextField7.setText(newItem);
 
-        result = PostgreSQL.showEvent("Object", "NAMEOBJECT", choiceObject, 4);
+        result = PostgreSQL.showRecord("Object", "NAMEOBJECT", choiceObject, 4);
         for(String element:result) {
             newItem = element;
         }
@@ -888,28 +882,28 @@ public class Interface extends javax.swing.JFrame {
         DefaultMutableTreeNode leafTreeObjects;
         
 
-        result = PostgreSQL.showEvent("Object","TYPE","Объект наблюдения", 1);
+        result = PostgreSQL.showRecord("Object","TYPE","Объект наблюдения", 1);
         for(String element:result) {
             leafTreeObjects = new DefaultMutableTreeNode(element);
             leafTreeObjects.setAllowsChildren(false);
             objectOfObservation.add(leafTreeObjects);
         }
                
-        result = PostgreSQL.showEvent("Object","TYPE","Должность", 1);
+        result = PostgreSQL.showRecord("Object","TYPE","Должность", 1);
         for(String element:result) {
             leafTreeObjects = new DefaultMutableTreeNode(element);
             leafTreeObjects.setAllowsChildren(false);
             post.add(leafTreeObjects);
         }
             
-        result = PostgreSQL.showEvent("Object","TYPE","Отдел", 1);
+        result = PostgreSQL.showRecord("Object","TYPE","Отдел", 1);
         for(String element:result) {
             leafTreeObjects = new DefaultMutableTreeNode(element);
             leafTreeObjects.setAllowsChildren(false);
             department.add(leafTreeObjects);
         }
             
-        result = PostgreSQL.showEvent("Object","TYPE","Направление деятельности", 1);
+        result = PostgreSQL.showRecord("Object","TYPE","Направление деятельности", 1);
         for(String element:result) {
             leafTreeObjects = new DefaultMutableTreeNode(element);
             leafTreeObjects.setAllowsChildren(false);
@@ -933,25 +927,23 @@ public class Interface extends javax.swing.JFrame {
     private void SaveChangesAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveChangesAccountActionPerformed
 
         if (!jTextFirstLastName.getText().equals("")){
-            String res1 = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
             
-            result = PostgreSQL.showEvent("Role","", "", 1);
-            ArrayList setRole = new ArrayList();
-            for (String item:result){
-                setRole.add(item);
-            }
-
+            String name = jListAccounts.getSelectedValuesList().toString().substring(1, jListAccounts.getSelectedValuesList().toString().length()-1);
+            
+            ArrayList<String> setRole = PostgreSQL.showRecord("Role","","",1);
+            
             try {
                 String role = LogisticsRole.setRole(jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString());
-                if (!(role == "")){
+                if (!(role.isEmpty())){
+                    
                     if (MessageBox.messChange()){
                         
                         if (control == true){
                             role = MessageBox.notificationSetRole(role, setRole);
                         }
                         
-                        listAccounts.removeElement(res1);
-                        PostgreSQL.removeRecord("LISTUSERS", "NAMEUSER", res1);
+                        listAccounts.removeElement(name);
+                        PostgreSQL.removeRecord("LISTUSERS", "NAMEUSER", name);
                         
                         String[] ar = {jComboBoxPost.getSelectedItem().toString(),jComboBoxDepartment.getSelectedItem().toString(),jComboBoxActivities.getSelectedItem().toString(),jTextPhoneNumber.getText(),role};
                         List<String> attribute = Arrays.asList(ar);
@@ -963,12 +955,13 @@ public class Interface extends javax.swing.JFrame {
                 Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else MessageBox.messMiss();
+        
         UpdateListAccountsActionPerformed(null);
     }//GEN-LAST:event_SaveChangesAccountActionPerformed
 
     private void UpdateListAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListAccountsActionPerformed
       
-        result = PostgreSQL.showEvent("User","", "", 1);   
+        result = PostgreSQL.showRecord("User","", "", 1);   
         for(String i:result) {
             if (!(listAccounts.contains(i))){
                 listAccounts.addElement(i);
@@ -988,9 +981,9 @@ public class Interface extends javax.swing.JFrame {
 
     private void ChangeAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeAccountActionPerformed
 
-        allPosition = PostgreSQL.showEvent("Object", "TYPE","Должность", 1); 
-        allDepartment = PostgreSQL.showEvent("Object","TYPE","Отдел", 1);
-        allActivities = PostgreSQL.showEvent("Object", "TYPE", "Направление деятельности", 1);
+        allPosition = PostgreSQL.showRecord("Object", "TYPE","Должность", 1); 
+        allDepartment = PostgreSQL.showRecord("Object","TYPE","Отдел", 1);
+        allActivities = PostgreSQL.showRecord("Object", "TYPE", "Направление деятельности", 1);
         
         jComboBoxPost.setModel(new javax.swing.DefaultComboBoxModel(allPosition.toArray()));
         jComboBoxDepartment.setModel(new javax.swing.DefaultComboBoxModel(allDepartment.toArray()));
@@ -1001,31 +994,31 @@ public class Interface extends javax.swing.JFrame {
         
         String newItem = null;
         
-        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 2);
+        result = PostgreSQL.showRecord("User","NAMEUSER", choiceAccount, 2);
         for(String element:result) {
             newItem = element;
         }
         jComboBoxPost.setSelectedItem(newItem);
 
-        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 3);
+        result = PostgreSQL.showRecord("User","NAMEUSER", choiceAccount, 3);
         for(String element:result) {
             newItem = element;
         }
         jComboBoxDepartment.setSelectedItem(newItem);
 
-        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 4);
+        result = PostgreSQL.showRecord("User","NAMEUSER", choiceAccount, 4);
         for(String element:result) {
             newItem = element;
         }
         jComboBoxActivities.setSelectedItem(newItem);
 
-        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 5);
+        result = PostgreSQL.showRecord("User","NAMEUSER", choiceAccount, 5);
         for(String element:result) {
             newItem = element;
         }
         jTextPhoneNumber.setText(newItem);
 
-        result = PostgreSQL.showEvent("User","NAMEUSER", choiceAccount, 6);
+        result = PostgreSQL.showRecord("User","NAMEUSER", choiceAccount, 6);
         for(String element:result) {
             newItem = element;
         }
@@ -1061,8 +1054,10 @@ public class Interface extends javax.swing.JFrame {
 
         choiceRole = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
             if (PostgreSQL.findRecord("LISTROLE", "NAMEROLE", choiceRole)){
-                listRoles.removeElement(choiceRole);
-                PostgreSQL.removeRecord("LISTROLE","NAMEROLE",choiceRole);
+                if (MessageBox.messRemove()){
+                    listRoles.removeElement(choiceRole);
+                    PostgreSQL.removeRecord("LISTROLE","NAMEROLE",choiceRole);
+                }
             }
     }//GEN-LAST:event_RemoveRoleActionPerformed
 
@@ -1070,55 +1065,55 @@ public class Interface extends javax.swing.JFrame {
         choiceRole = jListRole.getSelectedValuesList().toString().substring(1, jListRole.getSelectedValuesList().toString().length()-1);
         String newItem = "";
 
-        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 1);
+        result = PostgreSQL.showRecord("Role","NAMEROLE", choiceRole, 1);
         for(String element:result) {
             newItem = element;
         }
         jTextNameRole.setText(newItem);
 
-        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 2);
+        result = PostgreSQL.showRecord("Role","NAMEROLE", choiceRole, 2);
         for(String element:result) {
             newItem = element;
         }
         jTextField1.setText(newItem);
 
-        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 3);
+        result = PostgreSQL.showRecord("Role","NAMEROLE", choiceRole, 3);
         for(String element:result) {
             newItem = element;
         }
         jTextField2.setText(newItem);
 
-        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 4);
+        result = PostgreSQL.showRecord("Role","NAMEROLE", choiceRole, 4);
         for(String element:result) {
             newItem = element;
         }
         jTextField3.setText(newItem);
 
-        result = PostgreSQL.showEvent("Role","NAMEROLE", choiceRole, 5);
+        result = PostgreSQL.showRecord("Role","NAMEROLE", choiceRole, 5);
         for(String element:result) {
             newItem = element;
         }
         jTextField4.setText(newItem);
 
-        result = PostgreSQL.showEvent("Object","TYPE", "Должность", 1);
+        result = PostgreSQL.showRecord("Object","TYPE", "Должность", 1);
         for(String element:result) {
             if(!listPosition.contains(element))
                 listPosition.addElement(element);    
         }
 
-        result = PostgreSQL.showEvent("Object","TYPE", "Объект наблюдения", 1);
+        result = PostgreSQL.showRecord("Object","TYPE", "Объект наблюдения", 1);
         for (String element:result){
             if(!listObjects.contains(element))
                 listObjects.addElement(element);    
         }
 
-        result = PostgreSQL.showEvent("Object","TYPE", "Отдел", 1);
+        result = PostgreSQL.showRecord("Object","TYPE", "Отдел", 1);
         for (String element:result){
             if(!listDepartment.contains(element))
                 listDepartment.addElement(element);    
         }
 
-        result = PostgreSQL.showEvent("Object","TYPE", "Направление деятельности", 1);
+        result = PostgreSQL.showRecord("Object","TYPE", "Направление деятельности", 1);
         for (String element:result){
             if(!listActivities.contains(element))
                 listActivities.addElement(element);    
@@ -1128,7 +1123,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void UpdateListRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateListRoleActionPerformed
 
-        result = PostgreSQL.showEvent("Role","", "", 1);
+        result = PostgreSQL.showRecord("Role","", "", 1);
         for(String element:result) {
             if (!(listRoles.contains(element))){
                 listRoles.addElement(element);

@@ -7,28 +7,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import practice.CreateRecord;
 import practice.LogisticsRole;
+import practice.MessageBox;
 import practice.PostgreSQL;
-import practice.ReadXLS;
 import static practice.Windows.Interface.allPosition;
 import static practice.Windows.Interface.allDepartment;
 import static practice.Windows.Interface.allActivities;
 
 public class WindowCreateUser extends javax.swing.JFrame {
-    protected String res = "";
-    protected boolean control;
     
     public WindowCreateUser() throws IOException {
-        
-        allPosition = PostgreSQL.showEvent("Object", "TYPE","Должность", 1); 
-        allDepartment = PostgreSQL.showEvent("Object","TYPE","Отдел", 1);
-        allActivities = PostgreSQL.showEvent("Object", "TYPE", "Направление деятельности", 1);
+        allPosition = PostgreSQL.showRecord("Object", "TYPE","Должность", 1); 
+        allDepartment = PostgreSQL.showRecord("Object","TYPE","Отдел", 1);
+        allActivities = PostgreSQL.showRecord("Object", "TYPE", "Направление деятельности", 1);
         initComponents();
 
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture4.png")));
@@ -61,12 +53,6 @@ public class WindowCreateUser extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Сохранить");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,12 +105,12 @@ public class WindowCreateUser extends javax.swing.JFrame {
             }
         });
         jMenu2.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
                 jMenu2MenuSelected(evt);
+            }
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
         });
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
@@ -203,58 +189,30 @@ public class WindowCreateUser extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-      
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        ArrayList<String> setrole = PostgreSQL.showRecord("Role","","",1);
         
-        ArrayList setrole = new ArrayList();
-        ReadXLS RXLS;
         try {
-            RXLS = new ReadXLS(1,0,"",0);
-            for (String item:RXLS.srt){
-            setrole.add(item);
+            String role = LogisticsRole.setRole(jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString());
+            if (!(role.isEmpty())){
+
+                if (Interface.control){
+                    role = MessageBox.notificationSetRole(role,setrole);
+                }
+
+                String[] ar = {jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText(),role};
+                List<String> attribute;
+                attribute = Arrays.asList(ar);
+                
+                PostgreSQL.createRecord("User", jTextField1.getText(), attribute);
             }
+            
         } catch (IOException ex) {
             Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-	
-        try {
-            String role = LogisticsRole.setRole(jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString());
-            if (!(role == "")){
-
-                if (Interface.control){
-                JOptionPane optionPaneFact = new JOptionPane();
-                UIManager.put("OptionPane.yesButtonText", "Да");
-                UIManager.put("OptionPane.noButtonText", "Нет");
-                optionPaneFact.updateUI();
-                int result = optionPaneFact.showConfirmDialog(null, "Новому пользователю будет соответствовать следующая роль: "+role+ ". Выбрать роль вручную?", "Подтверждение роли!", 
-                optionPaneFact.YES_NO_OPTION, optionPaneFact.QUESTION_MESSAGE);
-            
-                switch(result){
-                    case JOptionPane.YES_OPTION:
-                        Object changeRole = JOptionPane.showInputDialog(null,"Выберите роль","Выбор роли",JOptionPane.QUESTION_MESSAGE, null, setrole.toArray(), setrole.get(0) );
-                        role = (String) changeRole;
-                        break;
-                    case JOptionPane.NO_OPTION:  break;
-                    case JOptionPane.CLOSED_OPTION:  break;
-                    default: break;
-                }
-                
-                }
-                CreateRecord.createRecord("0",jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText(),role);
-                res = jTextField1.getText();
-                
-                String[] ar = {jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString(),jTextField2.getText(),role};
-                List<String> attribute = new ArrayList();
-                attribute = Arrays.asList(ar);
-                PostgreSQL.createRecord("User", jTextField1.getText(), attribute);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(WindowCreateUser.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.setVisible(false);  
+        
+        this.setVisible(false);  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -310,7 +268,6 @@ public class WindowCreateUser extends javax.swing.JFrame {
             }
         });
     }
-    private DefaultComboBoxModel model = new DefaultComboBoxModel();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
