@@ -8,8 +8,15 @@ import java.util.Scanner;
 public class General {
     
     public static void main (String... ars) throws IOException{
-        String file = "XLS.xls";
-        String findWord = "";
+        System.out.println(PostgreSQL.findRecord("LISTUSERS","NAMEUSER","Петр"));
+
+
+
+        //String file = "XLS.xls";
+        //String findWord = "qwerty";
+        //int sheetNum = 0;
+        //String changeTXT = "a,b,c";
+        //String[] roleThings = {"qwe","rty","ewq"};
         /* System.out.println("Создание (субъект, объект, роль)");
         Scanner scan = new Scanner(System.in);
         
@@ -42,9 +49,17 @@ public class General {
         CreateXLS.writeToXLS(file, ls, sheet); */
         
         //System.out.println(ReadXLS.parse(file));
-        //ReadXLS.changeCell(file, 0,0,0,"nnnn");
-        ReadXLS.find(file,findWord);
         
+        //ReadXLS.changeCell(file, 0, 0, 0, "nnnn");
+        
+        // Поиск в xls, на введеном номере страницы и ячейки, в случае введения замены - проиходит замена, иначе - удаление записи.
+        
+        //System.out.println(LogisticsRole.setRole(roleThings)); //Поиск роли по должности, отделу и деятельности String post, String activity, String department
+    
+        //String [] s = changeTXT.split(",");
+        //for (String h:s){
+        //    System.out.println(h);
+        //}        
     }
     
 }
